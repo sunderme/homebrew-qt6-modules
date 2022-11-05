@@ -59,7 +59,7 @@ class Qt6Svg < Formula
   fails_with gcc: "5"
 
   def install
-    cmake_args = std_cmake_args(install_prefix: HOMEBREW_PREFIX, find_framework: "FIRST") + %w[
+    cmake_args = std_cmake_args() + %w[
       -DINSTALL_MKSPECSDIR=share/qt/mkspecs
 
       -DFEATURE_pkg_config=ON
