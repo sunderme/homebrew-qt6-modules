@@ -7,7 +7,7 @@ jobs:
   
       
   macosx:
-    name: Mac OS X
+    name: Mac OS X qtsvg
     runs-on: macos-11
     if: True
 
@@ -39,6 +39,42 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
       with:
         files: qt6-svg*.tar.gz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
+
+  macosx:
+    name: Mac OS X qt5compat
+    runs-on: macos-11
+    if: True
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Install Dependencies
+      run: |
+        wget https://github.com/sunderme/homebrew-qt6/releases/download/6.4.0/qt6-base--6.4.0.big_sur.bottle.tar.gz
+        brew install ./qt6-base--6.4.0.big_sur.bottle.tar.gz
+
+    - name: Package
+      id: package
+      run: |
+        brew install --build-bottle ${{ github.repository_owner }}/qt6-modules/qt6-qt5compat
+        brew bottle qt6-qt5compat
+        ls -l
+    - name: Archive bottle
+      uses: actions/upload-artifact@v3
+      with:
+        name: qt6-qt5compat
+        path: qt6-qt5compat*.tar.gz 
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: qt6-qt5compat*.tar.gz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
 
