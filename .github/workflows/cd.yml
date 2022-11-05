@@ -6,7 +6,7 @@ on:
 jobs:
   
       
-  macosx:
+  svg:
     name: Mac OS X qtsvg
     runs-on: macos-11
     if: True
@@ -42,7 +42,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
 
-  macosx:
+  qt5compat:
     name: Mac OS X qt5compat
     runs-on: macos-11
     if: True
@@ -78,7 +78,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
     
-  macosx:
+  tools:
     name: Mac OS X tools
     runs-on: macos-11
     if: True
@@ -114,7 +114,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
 
-  macosx:
+  charts:
     name: Mac OS X charts
     runs-on: macos-11
     if: True
