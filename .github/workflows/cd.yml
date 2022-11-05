@@ -19,8 +19,8 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        wget https://github.com/sunderme/homebrew-qt6/releases/download/6.4.0/qt-base--6.4.0.big_sur.bottle.tar.gz
-        brew install ./qt-base--6.4.0.big_sur.bottle.tar.gz
+        wget https://github.com/sunderme/homebrew-qt6/releases/download/6.4.0/qt6-base--6.4.0.big_sur.bottle.tar.gz
+        brew install ./qt6-base--6.4.0.big_sur.bottle.tar.gz
 
     - name: Package
       id: package
