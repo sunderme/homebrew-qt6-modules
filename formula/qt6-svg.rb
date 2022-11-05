@@ -1,7 +1,7 @@
 class Qt6SVG < Formula
   desc "Cross-platform application and UI framework"
   homepage "https://www.qt.io/"
-  url "https://github.com/sunderme/homebrew-qt6/releases/download/6.4.0/qt6-base--6.4.0.big_sur.bottle.tar.gz"
+  url "https://download.qt.io/official_releases/qt/6.4/6.4.0/submodules/qtsvg-everywhere-src-6.4.0.tar.xz"
   sha256 "03fdae9437d074dcfa387dc1f2c6e7e14fea0f989bf7e1aa265fd35ffc2c5b25"
   license all_of: ["GFDL-1.3-only", "GPL-2.0-only", "GPL-3.0-only", "LGPL-2.1-only", "LGPL-3.0-only"]
   head "https://code.qt.io/qt/qt6.git", branch: "dev"
