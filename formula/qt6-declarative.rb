@@ -1,7 +1,7 @@
 class Qt6Declarative < Formula
   desc "Cross-platform application and UI framework"
   homepage "https://www.qt.io/"
-  url "qtdeclarative-everywhere-src-6.4.0.tar.xz"
+  url "https://download.qt.io/official_releases/qt/6.4/6.4.0/submodules/qtdeclarative-everywhere-src-6.4.0.tar.xz"
   sha256 "3434e72fccfa0c929c326790723d05c155f5067746b1ab05cfd7a9ba632c4383"
   license all_of: ["GFDL-1.3-only", "GPL-2.0-only", "GPL-3.0-only", "LGPL-2.1-only", "LGPL-3.0-only"]
   head "https://code.qt.io/qt/qt6.git", branch: "dev"

@@ -151,7 +151,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
 
   declarative:
-    name: Mac OS X charts
+    name: Mac OS X declarative
     runs-on: macos-11
     if: True
 
