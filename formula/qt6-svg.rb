@@ -59,25 +59,12 @@ class Qt6Svg < Formula
   fails_with gcc: "5"
 
   def install
-    cmake_args = std_cmake_args() + %w[
-      -DINSTALL_MKSPECSDIR=share/qt/mkspecs
-
-      -DFEATURE_pkg_config=ON
-
-      -DQT_FEATURE_avx2=OFF
-    ]
-
-    if OS.mac?
-      cmake_args << "-DCMAKE_OSX_DEPLOYMENT_TARGET=#{MacOS.version}.0"
-    end
+    cmake_args = std_cmake_args() 
 
     system "cmake", *cmake_args ,"."
     system "cmake", "--build", "."
     system "cmake", "--install", "."
 
-    rm bin/"qt-cmake-private-install.cmake"
-
-    inreplace lib/"cmake/Qt6/qt.toolchain.cmake", "#{Superenv.shims_path}/", ""
 
     # The pkg-config files installed suggest that headers can be found in the
     # `include` directory. Make this so by creating symlinks from `include` to
