@@ -1,4 +1,4 @@
-class Qt6Svg < Formula
+class Qt6Charts < Formula
   desc "Cross-platform application and UI framework"
   homepage "https://www.qt.io/"
   url "https://download.qt.io/official_releases/qt/6.4/6.4.0/submodules/qtcharts-everywhere-src-6.4.0.tar.xz"
