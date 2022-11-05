@@ -69,7 +69,6 @@ class Qt6Svg < Formula
 
     if OS.mac?
       cmake_args << "-DCMAKE_OSX_DEPLOYMENT_TARGET=#{MacOS.version}.0"
-      config_args << "-sysroot" << MacOS.sdk_path.to_s
     end
 
     system "cmake", *cmake_args ,"."
