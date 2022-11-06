@@ -40,7 +40,7 @@ jobs:
         mkdir build
         cd build
         echo
-        cmake .. -G Ninja
+        /usr/local/QtBase-6.4.0-Darwin/bin/qt-cmake .. -G Ninja
         cmake --build . --parallel
         
     - name: Package
