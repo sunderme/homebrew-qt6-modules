@@ -69,7 +69,7 @@ jobs:
   qt5compat:
     name: Mac OS X qt5compat
     runs-on: macos-11
-    if: False
+    if: True
 
     steps:
     - name: Checkout
@@ -79,33 +79,57 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        wget https://github.com/sunderme/homebrew-qt6/releases/download/6.4.0/qt6-base--6.4.0.big_sur.bottle.tar.gz
-        brew install ./qt6-base--6.4.0.big_sur.bottle.tar.gz
+        wget https://github.com/sunderme/homebrew-qt6/releases/download/6.4.0-1/QtBase-6.4.0-Darwin.tar.xz
+        sudo tar xvf ./QtBase-6.4.0-Darwin.tar.xz -C /usr/local
+        rm QtBase-6.4.0-Darwin.tar.xz
 
+    - name: Build dependency
+      run: |
+        brew install ninja
+
+    - name: Download source
+      run: |
+        wget https://download.qt.io/official_releases/qt/6.4/6.4.0/submodules/qt5compat-everywhere-src-6.4.0.tar.xz
+        tar xvf qt5compat-everywhere-src-6.4.0.tar.xz
+        rm qt5compat-everywhere-src-6.4.0.tar.xz
+
+    - name: Build
+      run: |
+        cd qt5compat-everywhere-src-6.4.0
+        echo "include(CPack)">>CMakeLists.txt
+        mkdir build
+        cd build
+        echo
+        /usr/local/QtBase-6.4.0-Darwin/bin/qt-cmake .. -G Ninja
+        cmake --build . --parallel
+        
     - name: Package
       id: package
       run: |
-        brew install --build-bottle ${{ github.repository_owner }}/qt6-modules/qt6-qt5compat
-        brew bottle qt6-qt5compat
-        ls -l
+        cd qt5compat-everywhere-src-6.4.0
+        cd build
+        cpack -G TXZ
+        cp *.xz ../..
+        pwd
+
     - name: Archive bottle
       uses: actions/upload-artifact@v3
       with:
         name: qt6-qt5compat
-        path: qt6-qt5compat*.tar.gz 
+        path: Qt*.tar.xz 
 
     - name: Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
-        files: qt6-qt5compat*.tar.gz
+        files: Qt*.tar.xz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
     
   tools:
     name: Mac OS X tools
     runs-on: macos-11
-    if: False
+    if: True
 
     steps:
     - name: Checkout
@@ -115,33 +139,57 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        wget https://github.com/sunderme/homebrew-qt6/releases/download/6.4.0/qt6-base--6.4.0.big_sur.bottle.tar.gz
-        brew install ./qt6-base--6.4.0.big_sur.bottle.tar.gz
+        wget https://github.com/sunderme/homebrew-qt6/releases/download/6.4.0-1/QtBase-6.4.0-Darwin.tar.xz
+        sudo tar xvf ./QtBase-6.4.0-Darwin.tar.xz -C /usr/local
+        rm QtBase-6.4.0-Darwin.tar.xz
 
+    - name: Build dependency
+      run: |
+        brew install ninja
+
+    - name: Download source
+      run: |
+        wget https://download.qt.io/official_releases/qt/6.4/6.4.0/submodules/qttools-everywhere-src-6.4.0.tar.xz
+        tar xvf qttools-everywhere-src-6.4.0.tar.xz
+        rm qttools-everywhere-src-6.4.0.tar.xz
+
+    - name: Build
+      run: |
+        cd qttools-everywhere-src-6.4.0
+        echo "include(CPack)">>CMakeLists.txt
+        mkdir build
+        cd build
+        echo
+        /usr/local/QtBase-6.4.0-Darwin/bin/qt-cmake .. -G Ninja
+        cmake --build . --parallel
+        
     - name: Package
       id: package
       run: |
-        brew install --build-bottle ${{ github.repository_owner }}/qt6-modules/qt6-tools
-        brew bottle qt6-tools
-        ls -l
+        cd qttools-everywhere-src-6.4.0
+        cd build
+        cpack -G TXZ
+        cp *.xz ../..
+        pwd
+
     - name: Archive bottle
       uses: actions/upload-artifact@v3
       with:
         name: qt6-tools
-        path: qt6-tools*.tar.gz 
+        path: Qt*.tar.xz 
 
     - name: Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
-        files: qt6-tools*.tar.gz
+        files: Qt*.tar.xz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
 
   charts:
     name: Mac OS X charts
     runs-on: macos-11
-    if: False
+    if: True
 
     steps:
     - name: Checkout
@@ -151,33 +199,57 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        wget https://github.com/sunderme/homebrew-qt6/releases/download/6.4.0/qt6-base--6.4.0.big_sur.bottle.tar.gz
-        brew install ./qt6-base--6.4.0.big_sur.bottle.tar.gz
+        wget https://github.com/sunderme/homebrew-qt6/releases/download/6.4.0-1/QtBase-6.4.0-Darwin.tar.xz
+        sudo tar xvf ./QtBase-6.4.0-Darwin.tar.xz -C /usr/local
+        rm QtBase-6.4.0-Darwin.tar.xz
 
+    - name: Build dependency
+      run: |
+        brew install ninja
+
+    - name: Download source
+      run: |
+        wget https://download.qt.io/official_releases/qt/6.4/6.4.0/submodules/qtcharts-everywhere-src-6.4.0.tar.xz
+        tar xvf qtcharts-everywhere-src-6.4.0.tar.xz
+        rm qtcharts-everywhere-src-6.4.0.tar.xz
+
+    - name: Build
+      run: |
+        cd qtcharts-everywhere-src-6.4.0
+        echo "include(CPack)">>CMakeLists.txt
+        mkdir build
+        cd build
+        echo
+        /usr/local/QtBase-6.4.0-Darwin/bin/qt-cmake .. -G Ninja
+        cmake --build . --parallel
+        
     - name: Package
       id: package
       run: |
-        brew install --build-bottle ${{ github.repository_owner }}/qt6-modules/qt6-charts
-        brew bottle qt6-charts
-        ls -l
+        cd qtcharts-everywhere-src-6.4.0
+        cd build
+        cpack -G TXZ
+        cp *.xz ../..
+        pwd
+
     - name: Archive bottle
       uses: actions/upload-artifact@v3
       with:
         name: qt6-charts
-        path: qt6-charts*.tar.gz 
+        path: Qt*.tar.xz 
 
     - name: Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
-        files: qt6-charts*.tar.gz
+        files: Qt*.tar.xz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
 
   declarative:
     name: Mac OS X declarative
     runs-on: macos-11
-    if: False
+    if: True
 
     steps:
     - name: Checkout
@@ -187,26 +259,50 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        wget https://github.com/sunderme/homebrew-qt6/releases/download/6.4.0/qt6-base--6.4.0.big_sur.bottle.tar.gz
-        brew install ./qt6-base--6.4.0.big_sur.bottle.tar.gz
+        wget https://github.com/sunderme/homebrew-qt6/releases/download/6.4.0-1/QtBase-6.4.0-Darwin.tar.xz
+        sudo tar xvf ./QtBase-6.4.0-Darwin.tar.xz -C /usr/local
+        rm QtBase-6.4.0-Darwin.tar.xz
 
+    - name: Build dependency
+      run: |
+        brew install ninja
+
+    - name: Download source
+      run: |
+        wget https://download.qt.io/official_releases/qt/6.4/6.4.0/submodules/qtdeclarative-everywhere-src-6.4.0.tar.xz
+        tar xvf qtdeclarative-everywhere-src-6.4.0.tar.xz
+        rm qtdeclarative-everywhere-src-6.4.0.tar.xz
+
+    - name: Build
+      run: |
+        cd qtdeclarative-everywhere-src-6.4.0
+        echo "include(CPack)">>CMakeLists.txt
+        mkdir build
+        cd build
+        echo
+        /usr/local/QtBase-6.4.0-Darwin/bin/qt-cmake .. -G Ninja
+        cmake --build . --parallel
+        
     - name: Package
       id: package
       run: |
-        brew install --build-bottle ${{ github.repository_owner }}/qt6-modules/qt6-declarative
-        brew bottle qt6-declarative
-        ls -l
+        cd qtdeclarative-everywhere-src-6.4.0
+        cd build
+        cpack -G TXZ
+        cp *.xz ../..
+        pwd
+
     - name: Archive bottle
       uses: actions/upload-artifact@v3
       with:
         name: qt6-declarative
-        path: qt6-declarative*.tar.gz 
+        path: Qt*.tar.xz 
 
     - name: Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
-        files: qt6-declarative*.tar.gz
+        files: Qt*.tar.xz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
 
