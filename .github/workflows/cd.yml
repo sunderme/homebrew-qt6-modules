@@ -39,7 +39,6 @@ jobs:
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        echo
         /usr/local/QtBase-6.4.0-Darwin/bin/qt-cmake .. -G Ninja
         cmake --build . --parallel
         
@@ -99,7 +98,6 @@ jobs:
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        echo
         /usr/local/QtBase-6.4.0-Darwin/bin/qt-cmake .. -G Ninja
         cmake --build . --parallel
         
@@ -159,7 +157,6 @@ jobs:
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        echo
         /usr/local/QtBase-6.4.0-Darwin/bin/qt-cmake .. -G Ninja
         cmake --build . --parallel
         
@@ -219,7 +216,6 @@ jobs:
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        echo
         /usr/local/QtBase-6.4.0-Darwin/bin/qt-cmake .. -G Ninja
         cmake --build . --parallel
         
@@ -279,7 +275,6 @@ jobs:
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        echo
         /usr/local/QtBase-6.4.0-Darwin/bin/qt-cmake .. -G Ninja
         cmake --build . --parallel
         
@@ -322,6 +317,9 @@ jobs:
         wget https://github.com/sunderme/homebrew-qt6/releases/download/6.4.0-1/QtBase-6.4.0-Darwin.tar.xz
         sudo tar xvf ./QtBase-6.4.0-Darwin.tar.xz -C /usr/local
         rm QtBase-6.4.0-Darwin.tar.xz
+        wget https://github.com/sunderme/homebrew-qt6-modules/releases/download/6.4.0-1/Qt5Compat-6.4.0-Darwin.tar.xz
+        sudo tar xvf ./Qt5Compat-6.4.0-Darwin.tar.xz -C /usr/local/QtBase-6.4.0-Darwin --strip-components=1
+        rm Qt5Compat-6.4.0-Darwin.tar.xz
 
     - name: Download source
       run: |
@@ -335,7 +333,6 @@ jobs:
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        echo
         /usr/local/QtBase-6.4.0-Darwin/bin/qt-cmake .. 
         cmake --build . --parallel
         
@@ -359,6 +356,61 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
       with:
         files: QuaZip*.tar.xz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
+
+  poppler:
+    name: Mac OS X poppler
+    runs-on: macos-11
+    if: True
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Install Dependencies
+      run: |
+        wget https://github.com/sunderme/homebrew-qt6/releases/download/6.4.0-1/QtBase-6.4.0-Darwin.tar.xz
+        sudo tar xvf ./QtBase-6.4.0-Darwin.tar.xz -C /usr/local
+        rm QtBase-6.4.0-Darwin.tar.xz
+
+    - name: Download source
+      run: |
+        wget https://poppler.freedesktop.org/poppler-22.11.0.tar.xz
+        tar xvf poppler-22.11.0.tar.xz
+        rm poppler-22.11.0.tar.xz
+
+    - name: Build
+      run: |
+        cd poppler-22.11.0
+        echo "include(CPack)">>CMakeLists.txt
+        mkdir build
+        cd build
+        /usr/local/QtBase-6.4.0-Darwin/bin/qt-cmake .. 
+        cmake --build . --parallel
+        
+    - name: Package
+      id: package
+      run: |
+        cd poppler-22.11.0
+        cd build
+        cpack -G TXZ
+        cp *.xz ../..
+        pwd
+
+    - name: Archive bottle
+      uses: actions/upload-artifact@v3
+      with:
+        name: poppler-qt6
+        path: poppler*.tar.xz 
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: poppler*.tar.xz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
 
