@@ -375,6 +375,7 @@ jobs:
         wget https://github.com/sunderme/homebrew-qt6/releases/download/6.4.0-1/QtBase-6.4.0-Darwin.tar.xz
         sudo tar xvf ./QtBase-6.4.0-Darwin.tar.xz -C /usr/local
         rm QtBase-6.4.0-Darwin.tar.xz
+        brew install cairo fontconfig freetype gettext jpeg libpng libtiff little-cms2 nspr nss openjpeg
 
     - name: Download source
       run: |
