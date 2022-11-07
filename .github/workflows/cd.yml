@@ -349,7 +349,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: quazip-qt6
-        path: QUaZip*.tar.xz 
+        path: QuaZip*.tar.xz 
 
     - name: Release
       uses: softprops/action-gh-release@v1
