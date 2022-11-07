@@ -389,7 +389,7 @@ jobs:
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        /usr/local/QtBase-6.4.0-Darwin/bin/qt-cmake .. 
+        /usr/local/QtBase-6.4.0-Darwin/bin/qt-cmake .. -DBUILD_GTK_TESTS=OFF -DENABLE_BOOST=OFF -DENABLE_CMS=lcms2 -DENABLE_GLIB=OFF -DENABLE_QT5=OFF -DENABLE_QT6=ON -DENABLE_UNSTABLE_API_ABI_HEADERS=ON -DWITH_GObjectIntrospection=OFF
         cmake --build . --parallel
         
     - name: Package
