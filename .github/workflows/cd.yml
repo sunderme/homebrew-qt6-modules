@@ -362,7 +362,7 @@ jobs:
   poppler:
     name: Mac OS X poppler
     runs-on: macos-11
-    if: False
+    if: True
 
     steps:
     - name: Checkout
