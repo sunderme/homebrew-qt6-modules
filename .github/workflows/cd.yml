@@ -379,13 +379,13 @@ jobs:
 
     - name: Download source
       run: |
-        wget https://poppler.freedesktop.org/poppler-22.12.0.tar.xz
-        tar xvf poppler-22.12.0.tar.xz
-        rm poppler-22.12.0.tar.xz
+        wget https://poppler.freedesktop.org/poppler-23.01.0.tar.xz
+        tar xvf poppler-23.01.0.tar.xz
+        rm poppler-23.01.0.tar.xz
 
     - name: Build
       run: |
-        cd poppler-22.12.0
+        cd poppler-23.01.0
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
@@ -395,7 +395,7 @@ jobs:
     - name: Package
       id: package
       run: |
-        cd poppler-22.12.0
+        cd poppler-23.01.0
         cd build
         cpack -G TXZ
         cp *.xz ../..
