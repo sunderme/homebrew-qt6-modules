@@ -1,7 +1,9 @@
 name: CD
 on:
   - push
-  - pull_request
+
+env:
+  QT_VERSION: 6.4.2
 
 jobs:
   
@@ -9,7 +11,7 @@ jobs:
   svg:
     name: Mac OS X qtsvg
     runs-on: macos-11
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -19,9 +21,9 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        wget https://github.com/sunderme/homebrew-qt6/releases/download/6.4.2/QtBase-6.4.2-Darwin.tar.xz
-        sudo tar xvf ./QtBase-6.4.2-Darwin.tar.xz -C /usr/local
-        rm QtBase-6.4.2-Darwin.tar.xz
+        wget https://github.com/sunderme/homebrew-qt6/releases/download/${{ env.MY_VARIABLE }}/QtBase-${{ env.MY_VARIABLE }}-Darwin.tar.xz
+        sudo tar xvf ./QtBase-${{ env.MY_VARIABLE }}-Darwin.tar.xz -C /usr/local
+        rm QtBase-${{ env.MY_VARIABLE }}-Darwin.tar.xz
 
     - name: Build dependency
       run: |
@@ -29,23 +31,23 @@ jobs:
 
     - name: Download source
       run: |
-        wget https://download.qt.io/official_releases/qt/6.4/6.4.2/submodules/qtsvg-everywhere-src-6.4.2.tar.xz
-        tar xvf qtsvg-everywhere-src-6.4.2.tar.xz
-        rm qtsvg-everywhere-src-6.4.2.tar.xz
+        wget https://download.qt.io/official_releases/qt/6.4/${{ env.MY_VARIABLE }}/submodules/qtsvg-everywhere-src-${{ env.MY_VARIABLE }}.tar.xz
+        tar xvf qtsvg-everywhere-src-${{ env.MY_VARIABLE }}.tar.xz
+        rm qtsvg-everywhere-src-${{ env.MY_VARIABLE }}.tar.xz
 
     - name: Build
       run: |
-        cd qtsvg-everywhere-src-6.4.2
+        cd qtsvg-everywhere-src-${{ env.MY_VARIABLE }}
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        /usr/local/QtBase-6.4.2-Darwin/bin/qt-cmake .. -G Ninja
+        /usr/local/QtBase-${{ env.MY_VARIABLE }}-Darwin/bin/qt-cmake .. -G Ninja
         cmake --build . --parallel
         
     - name: Package
       id: package
       run: |
-        cd qtsvg-everywhere-src-6.4.2
+        cd qtsvg-everywhere-src-${{ env.MY_VARIABLE }}
         cd build
         cpack -G TXZ
         cp *.xz ../..
@@ -60,7 +62,7 @@ jobs:
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: 6.4.2
+        tag_name: ${{ env.MY_VARIABLE }}
         files: Qt*.tar.xz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
@@ -68,7 +70,7 @@ jobs:
   qt5compat:
     name: Mac OS X qt5compat
     runs-on: macos-11
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -78,9 +80,9 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        wget https://github.com/sunderme/homebrew-qt6/releases/download/6.4.2/QtBase-6.4.2-Darwin.tar.xz
-        sudo tar xvf ./QtBase-6.4.2-Darwin.tar.xz -C /usr/local
-        rm QtBase-6.4.2-Darwin.tar.xz
+        wget https://github.com/sunderme/homebrew-qt6/releases/download/${{ env.MY_VARIABLE }}/QtBase-${{ env.MY_VARIABLE }}-Darwin.tar.xz
+        sudo tar xvf ./QtBase-${{ env.MY_VARIABLE }}-Darwin.tar.xz -C /usr/local
+        rm QtBase-${{ env.MY_VARIABLE }}-Darwin.tar.xz
 
     - name: Build dependency
       run: |
@@ -88,23 +90,23 @@ jobs:
 
     - name: Download source
       run: |
-        wget https://download.qt.io/official_releases/qt/6.4/6.4.2/submodules/qt5compat-everywhere-src-6.4.2.tar.xz
-        tar xvf qt5compat-everywhere-src-6.4.2.tar.xz
-        rm qt5compat-everywhere-src-6.4.2.tar.xz
+        wget https://download.qt.io/official_releases/qt/6.4/${{ env.MY_VARIABLE }}/submodules/qt5compat-everywhere-src-${{ env.MY_VARIABLE }}.tar.xz
+        tar xvf qt5compat-everywhere-src-${{ env.MY_VARIABLE }}.tar.xz
+        rm qt5compat-everywhere-src-${{ env.MY_VARIABLE }}.tar.xz
 
     - name: Build
       run: |
-        cd qt5compat-everywhere-src-6.4.2
+        cd qt5compat-everywhere-src-${{ env.MY_VARIABLE }}
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        /usr/local/QtBase-6.4.2-Darwin/bin/qt-cmake .. -G Ninja
+        /usr/local/QtBase-${{ env.MY_VARIABLE }}-Darwin/bin/qt-cmake .. -G Ninja
         cmake --build . --parallel
         
     - name: Package
       id: package
       run: |
-        cd qt5compat-everywhere-src-6.4.2
+        cd qt5compat-everywhere-src-${{ env.MY_VARIABLE }}
         cd build
         cpack -G TXZ
         cp *.xz ../..
@@ -119,7 +121,7 @@ jobs:
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: 6.4.2
+        tag_name: ${{ env.MY_VARIABLE }}
         files: Qt*.tar.xz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
@@ -127,7 +129,7 @@ jobs:
   tools:
     name: Mac OS X tools
     runs-on: macos-11
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -137,9 +139,9 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        wget https://github.com/sunderme/homebrew-qt6/releases/download/6.4.2/QtBase-6.4.2-Darwin.tar.xz
-        sudo tar xvf ./QtBase-6.4.2-Darwin.tar.xz -C /usr/local
-        rm QtBase-6.4.2-Darwin.tar.xz
+        wget https://github.com/sunderme/homebrew-qt6/releases/download/${{ env.MY_VARIABLE }}/QtBase-${{ env.MY_VARIABLE }}-Darwin.tar.xz
+        sudo tar xvf ./QtBase-${{ env.MY_VARIABLE }}-Darwin.tar.xz -C /usr/local
+        rm QtBase-${{ env.MY_VARIABLE }}-Darwin.tar.xz
 
     - name: Build dependency
       run: |
@@ -147,23 +149,23 @@ jobs:
 
     - name: Download source
       run: |
-        wget https://download.qt.io/official_releases/qt/6.4/6.4.2/submodules/qttools-everywhere-src-6.4.2.tar.xz
-        tar xvf qttools-everywhere-src-6.4.2.tar.xz
-        rm qttools-everywhere-src-6.4.2.tar.xz
+        wget https://download.qt.io/official_releases/qt/6.4/${{ env.MY_VARIABLE }}/submodules/qttools-everywhere-src-${{ env.MY_VARIABLE }}.tar.xz
+        tar xvf qttools-everywhere-src-${{ env.MY_VARIABLE }}.tar.xz
+        rm qttools-everywhere-src-${{ env.MY_VARIABLE }}.tar.xz
 
     - name: Build
       run: |
-        cd qttools-everywhere-src-6.4.2
+        cd qttools-everywhere-src-${{ env.MY_VARIABLE }}
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        /usr/local/QtBase-6.4.2-Darwin/bin/qt-cmake .. -G Ninja
+        /usr/local/QtBase-${{ env.MY_VARIABLE }}-Darwin/bin/qt-cmake .. -G Ninja
         cmake --build . --parallel
         
     - name: Package
       id: package
       run: |
-        cd qttools-everywhere-src-6.4.2
+        cd qttools-everywhere-src-${{ env.MY_VARIABLE }}
         cd build
         cpack -G TXZ
         cp *.xz ../..
@@ -178,7 +180,7 @@ jobs:
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: 6.4.2
+        tag_name: ${{ env.MY_VARIABLE }}
         files: Qt*.tar.xz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
@@ -186,7 +188,7 @@ jobs:
   charts:
     name: Mac OS X charts
     runs-on: macos-11
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -196,9 +198,9 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        wget https://github.com/sunderme/homebrew-qt6/releases/download/6.4.2/QtBase-6.4.2-Darwin.tar.xz
-        sudo tar xvf ./QtBase-6.4.2-Darwin.tar.xz -C /usr/local
-        rm QtBase-6.4.2-Darwin.tar.xz
+        wget https://github.com/sunderme/homebrew-qt6/releases/download/${{ env.MY_VARIABLE }}/QtBase-${{ env.MY_VARIABLE }}-Darwin.tar.xz
+        sudo tar xvf ./QtBase-${{ env.MY_VARIABLE }}-Darwin.tar.xz -C /usr/local
+        rm QtBase-${{ env.MY_VARIABLE }}-Darwin.tar.xz
 
     - name: Build dependency
       run: |
@@ -206,23 +208,23 @@ jobs:
 
     - name: Download source
       run: |
-        wget https://download.qt.io/official_releases/qt/6.4/6.4.2/submodules/qtcharts-everywhere-src-6.4.2.tar.xz
-        tar xvf qtcharts-everywhere-src-6.4.2.tar.xz
-        rm qtcharts-everywhere-src-6.4.2.tar.xz
+        wget https://download.qt.io/official_releases/qt/6.4/${{ env.MY_VARIABLE }}/submodules/qtcharts-everywhere-src-${{ env.MY_VARIABLE }}.tar.xz
+        tar xvf qtcharts-everywhere-src-${{ env.MY_VARIABLE }}.tar.xz
+        rm qtcharts-everywhere-src-${{ env.MY_VARIABLE }}.tar.xz
 
     - name: Build
       run: |
-        cd qtcharts-everywhere-src-6.4.2
+        cd qtcharts-everywhere-src-${{ env.MY_VARIABLE }}
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        /usr/local/QtBase-6.4.2-Darwin/bin/qt-cmake .. -G Ninja
+        /usr/local/QtBase-${{ env.MY_VARIABLE }}-Darwin/bin/qt-cmake .. -G Ninja
         cmake --build . --parallel
         
     - name: Package
       id: package
       run: |
-        cd qtcharts-everywhere-src-6.4.2
+        cd qtcharts-everywhere-src-${{ env.MY_VARIABLE }}
         cd build
         cpack -G TXZ
         cp *.xz ../..
@@ -237,7 +239,7 @@ jobs:
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: 6.4.2
+        tag_name: ${{ env.MY_VARIABLE }}
         files: Qt*.tar.xz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
@@ -245,7 +247,7 @@ jobs:
   declarative:
     name: Mac OS X declarative
     runs-on: macos-11
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -255,9 +257,9 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        wget https://github.com/sunderme/homebrew-qt6/releases/download/6.4.2/QtBase-6.4.2-Darwin.tar.xz
-        sudo tar xvf ./QtBase-6.4.2-Darwin.tar.xz -C /usr/local
-        rm QtBase-6.4.2-Darwin.tar.xz
+        wget https://github.com/sunderme/homebrew-qt6/releases/download/${{ env.MY_VARIABLE }}/QtBase-${{ env.MY_VARIABLE }}-Darwin.tar.xz
+        sudo tar xvf ./QtBase-${{ env.MY_VARIABLE }}-Darwin.tar.xz -C /usr/local
+        rm QtBase-${{ env.MY_VARIABLE }}-Darwin.tar.xz
 
     - name: Build dependency
       run: |
@@ -265,23 +267,23 @@ jobs:
 
     - name: Download source
       run: |
-        wget https://download.qt.io/official_releases/qt/6.4/6.4.2/submodules/qtdeclarative-everywhere-src-6.4.2.tar.xz
-        tar xvf qtdeclarative-everywhere-src-6.4.2.tar.xz
-        rm qtdeclarative-everywhere-src-6.4.2.tar.xz
+        wget https://download.qt.io/official_releases/qt/6.4/${{ env.MY_VARIABLE }}/submodules/qtdeclarative-everywhere-src-${{ env.MY_VARIABLE }}.tar.xz
+        tar xvf qtdeclarative-everywhere-src-${{ env.MY_VARIABLE }}.tar.xz
+        rm qtdeclarative-everywhere-src-${{ env.MY_VARIABLE }}.tar.xz
 
     - name: Build
       run: |
-        cd qtdeclarative-everywhere-src-6.4.2
+        cd qtdeclarative-everywhere-src-${{ env.MY_VARIABLE }}
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        /usr/local/QtBase-6.4.2-Darwin/bin/qt-cmake .. -G Ninja
+        /usr/local/QtBase-${{ env.MY_VARIABLE }}-Darwin/bin/qt-cmake .. -G Ninja
         cmake --build . --parallel
         
     - name: Package
       id: package
       run: |
-        cd qtdeclarative-everywhere-src-6.4.2
+        cd qtdeclarative-everywhere-src-${{ env.MY_VARIABLE }}
         cd build
         cpack -G TXZ
         cp *.xz ../..
@@ -296,7 +298,7 @@ jobs:
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: 6.4.2
+        tag_name: ${{ env.MY_VARIABLE }}
         files: Qt*.tar.xz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
@@ -304,7 +306,7 @@ jobs:
   quazip:
     name: Mac OS X quazip
     runs-on: macos-11
-    if: False
+    if: True
 
     steps:
     - name: Checkout
@@ -314,12 +316,12 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        wget https://github.com/sunderme/homebrew-qt6/releases/download/6.4.2/QtBase-6.4.2-Darwin.tar.xz
-        sudo tar xvf ./QtBase-6.4.2-Darwin.tar.xz -C /usr/local
-        rm QtBase-6.4.2-Darwin.tar.xz
-        wget https://github.com/sunderme/homebrew-qt6-modules/releases/download/6.4.2/Qt5Compat-6.4.2-Darwin.tar.xz
-        sudo tar xvf ./Qt5Compat-6.4.2-Darwin.tar.xz -C /usr/local/QtBase-6.4.2-Darwin --strip-components=1
-        rm Qt5Compat-6.4.2-Darwin.tar.xz
+        wget https://github.com/sunderme/homebrew-qt6/releases/download/${{ env.MY_VARIABLE }}/QtBase-${{ env.MY_VARIABLE }}-Darwin.tar.xz
+        sudo tar xvf ./QtBase-${{ env.MY_VARIABLE }}-Darwin.tar.xz -C /usr/local
+        rm QtBase-${{ env.MY_VARIABLE }}-Darwin.tar.xz
+        wget https://github.com/sunderme/homebrew-qt6-modules/releases/download/${{ env.MY_VARIABLE }}/Qt5Compat-${{ env.MY_VARIABLE }}-Darwin.tar.xz
+        sudo tar xvf ./Qt5Compat-${{ env.MY_VARIABLE }}-Darwin.tar.xz -C /usr/local/QtBase-${{ env.MY_VARIABLE }}-Darwin --strip-components=1
+        rm Qt5Compat-${{ env.MY_VARIABLE }}-Darwin.tar.xz
 
     - name: Download source
       run: |
@@ -333,7 +335,7 @@ jobs:
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        /usr/local/QtBase-6.4.2-Darwin/bin/qt-cmake .. 
+        /usr/local/QtBase-${{ env.MY_VARIABLE }}-Darwin/bin/qt-cmake .. 
         cmake --build . --parallel
         
     - name: Package
@@ -354,7 +356,7 @@ jobs:
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: 6.4.2
+        tag_name: ${{ env.MY_VARIABLE }}
         files: QuaZip*.tar.xz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
@@ -362,7 +364,7 @@ jobs:
   poppler:
     name: Mac OS X poppler
     runs-on: macos-11
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -372,9 +374,9 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        wget https://github.com/sunderme/homebrew-qt6/releases/download/6.4.2/QtBase-6.4.2-Darwin.tar.xz
-        sudo tar xvf ./QtBase-6.4.2-Darwin.tar.xz -C /usr/local
-        rm QtBase-6.4.2-Darwin.tar.xz
+        wget https://github.com/sunderme/homebrew-qt6/releases/download/${{ env.MY_VARIABLE }}/QtBase-${{ env.MY_VARIABLE }}-Darwin.tar.xz
+        sudo tar xvf ./QtBase-${{ env.MY_VARIABLE }}-Darwin.tar.xz -C /usr/local
+        rm QtBase-${{ env.MY_VARIABLE }}-Darwin.tar.xz
         brew install cairo fontconfig freetype gettext jpeg libpng libtiff little-cms2 nspr nss openjpeg
 
     - name: Download source
@@ -389,7 +391,7 @@ jobs:
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        /usr/local/QtBase-6.4.2-Darwin/bin/qt-cmake .. -DBUILD_GTK_TESTS=OFF -DENABLE_BOOST=OFF -DENABLE_CMS=lcms2 -DENABLE_GLIB=OFF -DENABLE_QT5=OFF -DENABLE_QT6=ON -DENABLE_UNSTABLE_API_ABI_HEADERS=ON -DWITH_GObjectIntrospection=OFF
+        /usr/local/QtBase-${{ env.MY_VARIABLE }}-Darwin/bin/qt-cmake .. -DBUILD_GTK_TESTS=OFF -DENABLE_BOOST=OFF -DENABLE_CMS=lcms2 -DENABLE_GLIB=OFF -DENABLE_QT5=OFF -DENABLE_QT6=ON -DENABLE_UNSTABLE_API_ABI_HEADERS=ON -DWITH_GObjectIntrospection=OFF
         cmake --build . --parallel
         
     - name: Package
@@ -410,7 +412,7 @@ jobs:
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: 6.4.2
+        tag_name: ${{ env.MY_VARIABLE }}
         files: poppler*.tar.xz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
