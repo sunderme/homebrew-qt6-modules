@@ -306,7 +306,8 @@ jobs:
   quazip:
     name: Mac OS X quazip
     runs-on: macos-11
-    if: True
+    if: ${{ always() }}
+    needs: qt5compat
 
     steps:
     - name: Checkout
