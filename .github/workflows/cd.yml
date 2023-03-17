@@ -3,7 +3,8 @@ on:
   - push
 
 env:
-  QT_VERSION: 6.4.2
+  QT_VERSION: 6.4.3
+  QT_VERSION_MAJOR: 6.4
 
 jobs:
   
@@ -31,7 +32,7 @@ jobs:
 
     - name: Download source
       run: |
-        wget https://download.qt.io/official_releases/qt/6.4/${{ env.QT_VERSION }}/submodules/qtsvg-everywhere-src-${{ env.QT_VERSION }}.tar.xz
+        wget https://download.qt.io/official_releases/qt/${{ env.QT_VERSION_MAJOR }}/${{ env.QT_VERSION }}/submodules/qtsvg-everywhere-src-${{ env.QT_VERSION }}.tar.xz
         tar xvf qtsvg-everywhere-src-${{ env.QT_VERSION }}.tar.xz
         rm qtsvg-everywhere-src-${{ env.QT_VERSION }}.tar.xz
 
@@ -90,7 +91,7 @@ jobs:
 
     - name: Download source
       run: |
-        wget https://download.qt.io/official_releases/qt/6.4/${{ env.QT_VERSION }}/submodules/qt5compat-everywhere-src-${{ env.QT_VERSION }}.tar.xz
+        wget https://download.qt.io/official_releases/qt/${{ env.QT_VERSION_MAJOR }}/${{ env.QT_VERSION }}/submodules/qt5compat-everywhere-src-${{ env.QT_VERSION }}.tar.xz
         tar xvf qt5compat-everywhere-src-${{ env.QT_VERSION }}.tar.xz
         rm qt5compat-everywhere-src-${{ env.QT_VERSION }}.tar.xz
 
@@ -149,7 +150,7 @@ jobs:
 
     - name: Download source
       run: |
-        wget https://download.qt.io/official_releases/qt/6.4/${{ env.QT_VERSION }}/submodules/qttools-everywhere-src-${{ env.QT_VERSION }}.tar.xz
+        wget https://download.qt.io/official_releases/qt/${{ env.QT_VERSION_MAJOR }}/${{ env.QT_VERSION }}/submodules/qttools-everywhere-src-${{ env.QT_VERSION }}.tar.xz
         tar xvf qttools-everywhere-src-${{ env.QT_VERSION }}.tar.xz
         rm qttools-everywhere-src-${{ env.QT_VERSION }}.tar.xz
 
@@ -208,7 +209,7 @@ jobs:
 
     - name: Download source
       run: |
-        wget https://download.qt.io/official_releases/qt/6.4/${{ env.QT_VERSION }}/submodules/qtcharts-everywhere-src-${{ env.QT_VERSION }}.tar.xz
+        wget https://download.qt.io/official_releases/qt/${{ env.QT_VERSION_MAJOR }}/${{ env.QT_VERSION }}/submodules/qtcharts-everywhere-src-${{ env.QT_VERSION }}.tar.xz
         tar xvf qtcharts-everywhere-src-${{ env.QT_VERSION }}.tar.xz
         rm qtcharts-everywhere-src-${{ env.QT_VERSION }}.tar.xz
 
@@ -267,7 +268,7 @@ jobs:
 
     - name: Download source
       run: |
-        wget https://download.qt.io/official_releases/qt/6.4/${{ env.QT_VERSION }}/submodules/qtdeclarative-everywhere-src-${{ env.QT_VERSION }}.tar.xz
+        wget https://download.qt.io/official_releases/qt/${{ env.QT_VERSION_MAJOR }}/${{ env.QT_VERSION }}/submodules/qtdeclarative-everywhere-src-${{ env.QT_VERSION }}.tar.xz
         tar xvf qtdeclarative-everywhere-src-${{ env.QT_VERSION }}.tar.xz
         rm qtdeclarative-everywhere-src-${{ env.QT_VERSION }}.tar.xz
 
