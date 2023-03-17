@@ -5,6 +5,7 @@ on:
 env:
   QT_VERSION: 6.4.3
   QT_VERSION_MAJOR: 6.4
+  POPPLER_VERSION: 23.03.0
 
 jobs:
   
@@ -12,7 +13,7 @@ jobs:
   svg:
     name: Mac OS X qtsvg
     runs-on: macos-11
-    if: False
+    if: True
 
     steps:
     - name: Checkout
@@ -71,7 +72,7 @@ jobs:
   qt5compat:
     name: Mac OS X qt5compat
     runs-on: macos-11
-    if: False
+    if: True
 
     steps:
     - name: Checkout
@@ -130,7 +131,7 @@ jobs:
   tools:
     name: Mac OS X tools
     runs-on: macos-11
-    if: False
+    if: True
 
     steps:
     - name: Checkout
@@ -189,7 +190,7 @@ jobs:
   charts:
     name: Mac OS X charts
     runs-on: macos-11
-    if: False
+    if: True
 
     steps:
     - name: Checkout
@@ -248,7 +249,7 @@ jobs:
   declarative:
     name: Mac OS X declarative
     runs-on: macos-11
-    if: False
+    if: True
 
     steps:
     - name: Checkout
@@ -383,13 +384,13 @@ jobs:
 
     - name: Download source
       run: |
-        wget https://poppler.freedesktop.org/poppler-23.02.0.tar.xz
-        tar xvf poppler-23.02.0.tar.xz
-        rm poppler-23.02.0.tar.xz
+        wget https://poppler.freedesktop.org/poppler-${{ env.POPPLER_VERSION }}.tar.xz
+        tar xvf poppler-${{ env.POPPLER_VERSION }}.tar.xz
+        rm poppler-${{ env.POPPLER_VERSION }}.tar.xz
 
     - name: Build
       run: |
-        cd poppler-23.02.0
+        cd poppler-${{ env.POPPLER_VERSION }}
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
@@ -399,7 +400,7 @@ jobs:
     - name: Package
       id: package
       run: |
-        cd poppler-23.02.0
+        cd poppler-${{ env.POPPLER_VERSION }}
         cd build
         cpack -G TXZ
         cp *.xz ../..
