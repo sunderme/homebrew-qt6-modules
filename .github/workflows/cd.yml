@@ -5,7 +5,7 @@ on:
 env:
   QT_VERSION: 6.4.3
   QT_VERSION_MAJOR: 6.4
-  POPPLER_VERSION: 23.03.0
+  POPPLER_VERSION: 23.04.0
 
 jobs:
   
@@ -13,7 +13,7 @@ jobs:
   svg:
     name: Mac OS X qtsvg
     runs-on: macos-11
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -72,7 +72,7 @@ jobs:
   qt5compat:
     name: Mac OS X qt5compat
     runs-on: macos-11
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -131,7 +131,7 @@ jobs:
   tools:
     name: Mac OS X tools
     runs-on: macos-11
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -190,7 +190,7 @@ jobs:
   charts:
     name: Mac OS X charts
     runs-on: macos-11
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -249,7 +249,7 @@ jobs:
   declarative:
     name: Mac OS X declarative
     runs-on: macos-11
-    if: True
+    if: False
 
     steps:
     - name: Checkout
