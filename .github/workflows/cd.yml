@@ -18,7 +18,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
       with:
-        fetch-depth: 0
+        fetch-depth: 0# needs: base
 
     - name: Build dependency
       run: |
@@ -63,7 +63,7 @@ jobs:
       
   svg:
     name: Mac OS X qtsvg
-    needs: base
+    # needs: base
     runs-on: macos-11
     if: True
 
@@ -123,7 +123,7 @@ jobs:
 
   qt5compat:
     name: Mac OS X qt5compat
-    needs: base
+    # needs: base
     runs-on: macos-11
     if: True
 
@@ -183,7 +183,7 @@ jobs:
     
   tools:
     name: Mac OS X tools
-    needs: base
+    # needs: base
     runs-on: macos-11
     if: True
 
@@ -243,7 +243,7 @@ jobs:
 
   charts:
     name: Mac OS X charts
-    needs: base
+    # needs: base
     runs-on: macos-11
     if: True
 
@@ -303,7 +303,7 @@ jobs:
 
   declarative:
     name: Mac OS X declarative
-    needs: base
+    # needs: base
     runs-on: macos-11
     if: True
 
@@ -422,7 +422,7 @@ jobs:
 
   poppler:
     name: Mac OS X poppler
-    needs: base
+    # needs: base
     runs-on: macos-11
     if: True
 
