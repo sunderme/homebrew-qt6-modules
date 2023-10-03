@@ -65,7 +65,7 @@ jobs:
     name: Mac OS X qtsvg
     # needs: base
     runs-on: macos-11
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -125,7 +125,7 @@ jobs:
     name: Mac OS X qt5compat
     # needs: base
     runs-on: macos-11
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -185,7 +185,7 @@ jobs:
     name: Mac OS X tools
     # needs: base
     runs-on: macos-11
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -245,7 +245,7 @@ jobs:
     name: Mac OS X charts
     # needs: base
     runs-on: macos-11
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -305,7 +305,7 @@ jobs:
     name: Mac OS X declarative
     # needs: base
     runs-on: macos-11
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -424,7 +424,7 @@ jobs:
     name: Mac OS X poppler
     # needs: base
     runs-on: macos-11
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -477,6 +477,51 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
 
+  nss:
+    name: Mac OS X nss
+    # needs: base
+    runs-on: macos-11
+    if: True
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Download source
+      run: |
+        wget https://ftp.mozilla.org/pub/security/nss/releases/NSS_3_94_RTM/src/nss-3.94-with-nspr-4.35.tar.gz
+        tar xf nss-3.94-with-nspr-4.35.tar.gz
+        rm nss-3.94-with-nspr-4.35.tar.gz
+
+    - name: Build
+      run: |
+        cd nss-3.94/nss
+        USE_64=1 BUILD_OPT=1 make -j
+        
+    - name: Package
+      id: package
+      run: |
+        cd ..
+        cd dist
+        ls 
+        tar cvJhf nss.tar.xz OSX*
+        pwd
+
+    - name: Archive bottle
+      uses: actions/upload-artifact@v3
+      with:
+        name: nss
+        path: nss.tar.xz 
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ env.QT_VERSION }}
+        files: nss.tar.xz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
 
         
  
