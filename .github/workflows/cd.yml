@@ -437,9 +437,6 @@ jobs:
         wget https://github.com/sunderme/homebrew-qt6-modules/releases/download/${{ env.QT_VERSION }}/QtBase-${{ env.QT_VERSION }}-Darwin.tar.xz
         sudo tar xvf ./QtBase-${{ env.QT_VERSION }}-Darwin.tar.xz -C /usr/local
         rm QtBase-${{ env.QT_VERSION }}-Darwin.tar.xz
-        wget https://github.com/sunderme/homebrew-qt6-modules/releases/download/${{ env.QT_VERSION }}/nss.tar.xz
-        sudo tar xvf ./nss.tar.xz -C /usr/local --strip-components=1
-        rm nss.tar.xz
         brew install cairo fontconfig freetype gettext jpeg libpng libtiff little-cms2 openjpeg
 
     - name: Download source
@@ -454,7 +451,7 @@ jobs:
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -DBUILD_GTK_TESTS=OFF -DENABLE_BOOST=OFF -DENABLE_CMS=lcms2 -DENABLE_GLIB=OFF -DENABLE_QT5=OFF -DENABLE_QT6=ON -DENABLE_UNSTABLE_API_ABI_HEADERS=ON -DWITH_GObjectIntrospection=OFF
+        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -DBUILD_GTK_TESTS=OFF -DENABLE_BOOST=OFF -DENABLE_CMS=lcms2 -DENABLE_GLIB=OFF -DENABLE_QT5=OFF -DENABLE_QT6=ON -DENABLE_UNSTABLE_API_ABI_HEADERS=ON -DWITH_GObjectIntrospection=OFF -DENABLE_NSS3=OFF
         cmake --build . --parallel
         
     - name: Package
