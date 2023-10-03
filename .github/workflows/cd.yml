@@ -495,6 +495,10 @@ jobs:
         tar xf nss-3.94-with-nspr-4.35.tar.gz
         rm nss-3.94-with-nspr-4.35.tar.gz
 
+    - name: clean brew
+      run: |
+        brew remove nss nspr
+
     - name: Build
       run: |
         cd nss-3.94/nss
