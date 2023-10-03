@@ -504,14 +504,12 @@ jobs:
       run: |
         export PATH="/opt/homebrew/opt/python/libexec/bin:$PATH"
         cd nss-3.94/nss
-        ./build.sh -o
-        # USE_64=1 BUILD_OPT=1 make -j
+        ./build.sh -o -j 2
         
     - name: Package
       id: package
       run: |
-        cd ..
-        cd dist
+        cd nss/dist
         ls 
         tar cvJhf nss.tar.xz Darwin*
         pwd
