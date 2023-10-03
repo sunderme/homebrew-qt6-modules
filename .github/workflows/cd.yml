@@ -497,8 +497,8 @@ jobs:
 
     - name: prepare build
       run: |
+        brew install ninja
         python3 -m pip install gyp-next
-
 
     - name: Build
       run: |
@@ -513,7 +513,7 @@ jobs:
         cd ..
         cd dist
         ls 
-        tar cvJhf nss.tar.xz OSX*
+        tar cvJhf nss.tar.xz Darwin*
         pwd
 
     - name: Archive bottle
