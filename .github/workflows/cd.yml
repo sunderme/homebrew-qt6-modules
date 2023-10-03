@@ -424,7 +424,7 @@ jobs:
     name: Mac OS X poppler
     # needs: base
     runs-on: macos-11
-    if: False
+    if: True
 
     steps:
     - name: Checkout
@@ -437,7 +437,10 @@ jobs:
         wget https://github.com/sunderme/homebrew-qt6-modules/releases/download/${{ env.QT_VERSION }}/QtBase-${{ env.QT_VERSION }}-Darwin.tar.xz
         sudo tar xvf ./QtBase-${{ env.QT_VERSION }}-Darwin.tar.xz -C /usr/local
         rm QtBase-${{ env.QT_VERSION }}-Darwin.tar.xz
-        brew install cairo fontconfig freetype gettext jpeg libpng libtiff little-cms2 nspr nss openjpeg
+        wget https://github.com/sunderme/homebrew-qt6-modules/releases/download/${{ env.OSX_QT_VERSION }}/nss.tar.xz
+        sudo tar xvf ./nss.tar.xz -C /usr/local --strip-components=1
+        rm nss.tar.xz
+        brew install cairo fontconfig freetype gettext jpeg libpng libtiff little-cms2 openjpeg
 
     - name: Download source
       run: |
@@ -481,7 +484,7 @@ jobs:
     name: Mac OS X nss
     # needs: base
     runs-on: macos-11
-    if: True
+    if: False
 
     steps:
     - name: Checkout
