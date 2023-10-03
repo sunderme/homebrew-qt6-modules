@@ -437,7 +437,7 @@ jobs:
         wget https://github.com/sunderme/homebrew-qt6-modules/releases/download/${{ env.QT_VERSION }}/QtBase-${{ env.QT_VERSION }}-Darwin.tar.xz
         sudo tar xvf ./QtBase-${{ env.QT_VERSION }}-Darwin.tar.xz -C /usr/local
         rm QtBase-${{ env.QT_VERSION }}-Darwin.tar.xz
-        wget https://github.com/sunderme/homebrew-qt6-modules/releases/download/${{ env.OSX_QT_VERSION }}/nss.tar.xz
+        wget https://github.com/sunderme/homebrew-qt6-modules/releases/download/${{ env.QT_VERSION }}/nss.tar.xz
         sudo tar xvf ./nss.tar.xz -C /usr/local --strip-components=1
         rm nss.tar.xz
         brew install cairo fontconfig freetype gettext jpeg libpng libtiff little-cms2 openjpeg
