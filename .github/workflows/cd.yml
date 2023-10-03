@@ -509,11 +509,10 @@ jobs:
     - name: Package
       id: package
       run: |
-        ls
         cd nss-3.94/dist
-        ls 
         tar cvJhf nss.tar.xz Release
         pwd
+        mv nss.tar.xz ../..
 
     - name: Archive bottle
       uses: actions/upload-artifact@v3
