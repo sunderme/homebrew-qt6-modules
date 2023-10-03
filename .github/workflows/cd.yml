@@ -495,14 +495,18 @@ jobs:
         tar xf nss-3.94-with-nspr-4.35.tar.gz
         rm nss-3.94-with-nspr-4.35.tar.gz
 
-    - name: clean brew
+    - name: prepare build
       run: |
-        brew remove nss nspr
+        brew install mercurial git ninja python3-pip
+        python3 -m pip install gyp-next
+
 
     - name: Build
       run: |
+        export PATH="/opt/homebrew/opt/python/libexec/bin:$PATH"
         cd nss-3.94/nss
-        USE_64=1 BUILD_OPT=1 make -j
+        ./build.sh -o
+        # USE_64=1 BUILD_OPT=1 make -j
         
     - name: Package
       id: package
