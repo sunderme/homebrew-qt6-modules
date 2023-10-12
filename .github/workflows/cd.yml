@@ -3,8 +3,8 @@ on:
   - push
 
 env:
-  QT_VERSION: 6.5.3
-  QT_VERSION_MAJOR: 6.5
+  QT_VERSION: 6.6.0
+  QT_VERSION_MAJOR: 6.6
   POPPLER_VERSION: 23.10.0
 
 jobs:
@@ -12,7 +12,7 @@ jobs:
   base:
     name: Mac OS X
     runs-on: macos-11
-    if: False
+    if: True
 
     steps:
     - name: Checkout
@@ -424,7 +424,7 @@ jobs:
     name: Mac OS X poppler
     # needs: base
     runs-on: macos-11
-    if: True
+    if: False
 
     steps:
     - name: Checkout
