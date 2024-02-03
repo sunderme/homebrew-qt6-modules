@@ -64,7 +64,7 @@ jobs:
   baseM1:
     name: Mac OS X (M1)
     runs-on: macos-14
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -95,7 +95,7 @@ jobs:
       run: |
         cd qtbase-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        cpack -G TXZ
+        cpack -G TXZ -P QtBase-${{ env.QT_VERSION }}-Darwin-M1
         cp *.xz ../..
         pwd
 
@@ -173,6 +173,66 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
 
+  svgM1:
+    name: Mac OS X qtsvg (M1)
+    # needs: base
+    runs-on: macos-14
+    if: True
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Install Dependencies
+      run: |
+        wget https://github.com/sunderme/homebrew-qt6-modules/releases/download/${{ env.QT_VERSION }}/QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
+        sudo tar xvf ./QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz -C /usr/local
+        rm QtBase-${{ env.QT_VERSION }}-Darwin.tar.xz
+
+    - name: Build dependency
+      run: |
+        brew install ninja
+
+    - name: Download source
+      run: |
+        wget https://download.qt.io/official_releases/qt/${{ env.QT_VERSION_MAJOR }}/${{ env.QT_VERSION }}/submodules/qtsvg-everywhere-src-${{ env.QT_VERSION }}.tar.xz
+        tar xvf qtsvg-everywhere-src-${{ env.QT_VERSION }}.tar.xz
+        rm qtsvg-everywhere-src-${{ env.QT_VERSION }}.tar.xz
+
+    - name: Build
+      run: |
+        cd qtsvg-everywhere-src-${{ env.QT_VERSION }}
+        echo "include(CPack)">>CMakeLists.txt
+        mkdir build
+        cd build
+        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja
+        cmake --build . --parallel
+        
+    - name: Package
+      id: package
+      run: |
+        cd qtsvg-everywhere-src-${{ env.QT_VERSION }}
+        cd build
+        cpack -G TXZ -P QtSvg-${{ env.QT_VERSION }}-Darwin-M1
+        cp *.xz ../..
+        pwd
+
+    - name: Archive bottle
+      uses: actions/upload-artifact@v3
+      with:
+        name: qt6-svg
+        path: Qt*.tar.xz
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ env.QT_VERSION }}
+        files: Qt*.tar.xz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
+      
   qt5compat:
     name: Mac OS X qt5compat
     # needs: base
@@ -233,6 +293,66 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
     
+  qt5compatM1:
+    name: Mac OS X qt5compat (M1)
+    # needs: base
+    runs-on: macos-14
+    if: True
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Install Dependencies
+      run: |
+        wget https://github.com/sunderme/homebrew-qt6-modules/releases/download/${{ env.QT_VERSION }}/QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
+        sudo tar xvf ./QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz -C /usr/local
+        rm QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
+
+    - name: Build dependency
+      run: |
+        brew install ninja
+
+    - name: Download source
+      run: |
+        wget https://download.qt.io/official_releases/qt/${{ env.QT_VERSION_MAJOR }}/${{ env.QT_VERSION }}/submodules/qt5compat-everywhere-src-${{ env.QT_VERSION }}.tar.xz
+        tar xvf qt5compat-everywhere-src-${{ env.QT_VERSION }}.tar.xz
+        rm qt5compat-everywhere-src-${{ env.QT_VERSION }}.tar.xz
+
+    - name: Build
+      run: |
+        cd qt5compat-everywhere-src-${{ env.QT_VERSION }}
+        echo "include(CPack)">>CMakeLists.txt
+        mkdir build
+        cd build
+        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja
+        cmake --build . --parallel
+        
+    - name: Package
+      id: package
+      run: |
+        cd qt5compat-everywhere-src-${{ env.QT_VERSION }}
+        cd build
+        cpack -G TXZ -P Qt5Compat-${{ env.QT_VERSION }}-Darwin-M1
+        cp *.xz ../..
+        pwd
+
+    - name: Archive bottle
+      uses: actions/upload-artifact@v3
+      with:
+        name: qt6-qt5compat
+        path: Qt*.tar.xz 
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ env.QT_VERSION }}
+        files: Qt*.tar.xz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
+
   tools:
     name: Mac OS X tools
     # needs: base
@@ -512,6 +632,63 @@ jobs:
         cd poppler-${{ env.POPPLER_VERSION }}
         cd build
         cpack -G TXZ
+        cp *.xz ../../poppler-${{ env.POPPLER_VERSION }}-Darwin.tar.xz
+        pwd
+
+    - name: Archive bottle
+      uses: actions/upload-artifact@v3
+      with:
+        name: poppler-qt6
+        path: poppler*.tar.xz 
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ env.QT_VERSION }}
+        files: poppler*.tar.xz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
+
+  popplerM1:
+    name: Mac OS X poppler (M1)
+    # needs: base
+    runs-on: macos-14
+    if: True
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Install Dependencies
+      run: |
+        wget https://github.com/sunderme/homebrew-qt6-modules/releases/download/${{ env.QT_VERSION }}/QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
+        sudo tar xvf ./QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz -C /usr/local
+        rm QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
+        brew install cairo fontconfig freetype gettext jpeg libpng libtiff little-cms2 openjpeg
+
+    - name: Download source
+      run: |
+        wget https://poppler.freedesktop.org/poppler-${{ env.POPPLER_VERSION }}.tar.xz
+        tar xvf poppler-${{ env.POPPLER_VERSION }}.tar.xz
+        rm poppler-${{ env.POPPLER_VERSION }}.tar.xz
+
+    - name: Build
+      run: |
+        cd poppler-${{ env.POPPLER_VERSION }}
+        echo "include(CPack)">>CMakeLists.txt
+        mkdir build
+        cd build
+        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -DBUILD_GTK_TESTS=OFF -DENABLE_BOOST=OFF -DENABLE_CMS=lcms2 -DENABLE_GLIB=OFF -DENABLE_QT5=OFF -DENABLE_QT6=ON -DENABLE_UNSTABLE_API_ABI_HEADERS=ON -DWITH_GObjectIntrospection=OFF -DENABLE_NSS3=OFF -DENABLE_GPGME=OFF -DENABLE_LIBTIFF=OFF
+        cmake --build . --parallel
+        
+    - name: Package
+      id: package
+      run: |
+        cd poppler-${{ env.POPPLER_VERSION }}
+        cd build
+        cpack -G TXZ -P poppler-${{ env.POPPLER_VERSION }}-Darwin-M1
         cp *.xz ../../poppler-${{ env.POPPLER_VERSION }}-Darwin.tar.xz
         pwd
 
