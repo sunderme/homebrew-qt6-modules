@@ -874,8 +874,7 @@ jobs:
         cd poppler-${{ env.POPPLER_VERSION }}
         cd build
         cpack -G TXZ 
-        mv poppler-${{ env.POPPLER_VERSION }}-Darwin.tar.xz poppler-${{ env.POPPLER_VERSION }}-Darwin-M1.tar.xz
-        cp *.xz ../../poppler-${{ env.POPPLER_VERSION }}-Darwin.tar.xz
+        cp *.xz ../../poppler-${{ env.POPPLER_VERSION }}-Darwin-M1.tar.xz
         pwd
 
     - name: Archive bottle
