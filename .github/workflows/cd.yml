@@ -60,6 +60,58 @@ jobs:
         files: Qt*.tar.xz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
+
+  baseM1:
+    name: Mac OS X (M1)
+    runs-on: macos-14
+    if: True
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Build dependency
+      run: |
+        brew install ninja
+
+    - name: Download source
+      run: |
+        wget https://download.qt.io/official_releases/qt/${{ env.QT_VERSION_MAJOR }}/${{ env.QT_VERSION }}/submodules/qtbase-everywhere-src-${{ env.QT_VERSION }}.tar.xz
+        tar xvf qtbase-everywhere-src-${{ env.QT_VERSION }}.tar.xz
+    - name: Build
+      run: |
+        cd qtbase-everywhere-src-${{ env.QT_VERSION }}
+        echo "include(CPack)">>CMakeLists.txt
+        mkdir build
+        cd build
+        echo
+        cmake .. -G Ninja
+        cmake --build . --parallel
+        
+    - name: Package
+      id: package
+      run: |
+        cd qtbase-everywhere-src-${{ env.QT_VERSION }}
+        cd build
+        cpack -G TXZ
+        cp *.xz ../..
+        pwd
+
+    - name: Archive txz
+      uses: actions/upload-artifact@v3
+      with:
+        name: qt6-base
+        path: QtBase*.tar.xz 
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ env.QT_VERSION }}
+        files: Qt*.tar.xz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
       
   svg:
     name: Mac OS X qtsvg
@@ -424,7 +476,7 @@ jobs:
     name: Mac OS X poppler
     # needs: base
     runs-on: macos-11
-    if: True
+    if: False
 
     steps:
     - name: Checkout
