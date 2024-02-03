@@ -64,7 +64,7 @@ jobs:
   baseM1:
     name: Mac OS X (M1)
     runs-on: macos-14
-    if: False
+    if: True
 
     steps:
     - name: Checkout
@@ -175,7 +175,7 @@ jobs:
 
   svgM1:
     name: Mac OS X qtsvg (M1)
-    # needs: base
+    needs: baseM1
     runs-on: macos-14
     if: True
 
@@ -295,7 +295,7 @@ jobs:
     
   qt5compatM1:
     name: Mac OS X qt5compat (M1)
-    # needs: base
+    needs: baseM1
     runs-on: macos-14
     if: True
 
@@ -651,7 +651,7 @@ jobs:
 
   popplerM1:
     name: Mac OS X poppler (M1)
-    # needs: base
+    needs: baseM1
     runs-on: macos-14
     if: True
 
