@@ -5,7 +5,7 @@ on:
 env:
   QT_VERSION: 6.6.1
   QT_VERSION_MAJOR: 6.6
-  POPPLER_VERSION: 23.12.0
+  POPPLER_VERSION: 24.02.0
 
 jobs:
   
@@ -178,7 +178,7 @@ jobs:
     name: Mac OS X qtsvg (M1)
     needs: baseM1
     runs-on: macos-14
-    if: ${{ always() }}
+    # if: ${{ always() }}
 
     steps:
     - name: Checkout
@@ -299,7 +299,7 @@ jobs:
     name: Mac OS X qt5compat (M1)
     needs: baseM1
     runs-on: macos-14
-    if: ${{ always() }}
+    # if: ${{ always() }}
 
     steps:
     - name: Checkout
@@ -420,7 +420,7 @@ jobs:
     name: Mac OS X tools (M1)
     needs: baseM1
     runs-on: macos-14
-    if: ${{ always() }}
+    # if: ${{ always() }}
 
     steps:
     - name: Checkout
@@ -601,7 +601,7 @@ jobs:
     name: Mac OS X declarative (M1)
     needs: baseM1
     runs-on: macos-14
-    if: ${{ always() }}
+    # if: ${{ always() }}
 
     steps:
     - name: Checkout
@@ -661,7 +661,7 @@ jobs:
   quazip:
     name: Mac OS X quazip
     runs-on: macos-11
-    if: ${{ always() }}
+    # if: ${{ always() }}
     needs: qt5compat
 
     steps:
@@ -720,7 +720,7 @@ jobs:
   quazipM1:
     name: Mac OS X quazip (M1)
     runs-on: macos-14
-    if: ${{ always() }}
+    # if: ${{ always() }}
     needs: qt5compatM1
 
     steps:
@@ -781,7 +781,7 @@ jobs:
     name: Mac OS X poppler
     # needs: base
     runs-on: macos-11
-    if: False
+    if: True
 
     steps:
     - name: Checkout
@@ -873,7 +873,8 @@ jobs:
       run: |
         cd poppler-${{ env.POPPLER_VERSION }}
         cd build
-        cpack -G TXZ -P poppler-${{ env.POPPLER_VERSION }}-Darwin-M1
+        cpack -G TXZ 
+        mv poppler-${{ env.POPPLER_VERSION }}-Darwin.tar.xz poppler-${{ env.POPPLER_VERSION }}-Darwin-M1.tar.xz
         cp *.xz ../../poppler-${{ env.POPPLER_VERSION }}-Darwin.tar.xz
         pwd
 
