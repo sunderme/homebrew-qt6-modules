@@ -178,7 +178,7 @@ jobs:
     name: Mac OS X qtsvg (M1)
     needs: baseM1
     runs-on: macos-14
-    if: True
+    if: ${{ always() }}
 
     steps:
     - name: Checkout
@@ -299,7 +299,7 @@ jobs:
     name: Mac OS X qt5compat (M1)
     needs: baseM1
     runs-on: macos-14
-    if: True
+    if: ${{ always() }}
 
     steps:
     - name: Checkout
@@ -420,7 +420,7 @@ jobs:
     name: Mac OS X tools
     needs: baseM1
     runs-on: macos-14
-    if: False
+    if: ${{ always() }}
 
     steps:
     - name: Checkout
