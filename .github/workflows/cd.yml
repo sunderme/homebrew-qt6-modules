@@ -190,7 +190,7 @@ jobs:
       run: |
         wget https://github.com/sunderme/homebrew-qt6-modules/releases/download/${{ env.QT_VERSION }}/QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
         sudo tar xvf ./QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz -C /usr/local
-        rm QtBase-${{ env.QT_VERSION }}-Darwin.tar.xz
+        rm QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
 
     - name: Build dependency
       run: |
@@ -417,7 +417,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
 
   toolsM1:
-    name: Mac OS X tools
+    name: Mac OS X tools (M1)
     needs: baseM1
     runs-on: macos-14
     if: ${{ always() }}
@@ -580,6 +580,67 @@ jobs:
         cd qtdeclarative-everywhere-src-${{ env.QT_VERSION }}
         cd build
         cpack -G TXZ
+        cp *.xz ../..
+        pwd
+
+    - name: Archive bottle
+      uses: actions/upload-artifact@v3
+      with:
+        name: qt6-declarative
+        path: Qt*.tar.xz 
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ env.QT_VERSION }}
+        files: Qt*.tar.xz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
+
+  declarativeM1:
+    name: Mac OS X declarative (M1)
+    needs: baseM1
+    runs-on: macos-14
+    if: ${{ always() }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Install Dependencies
+      run: |
+        wget https://github.com/sunderme/homebrew-qt6-modules/releases/download/${{ env.QT_VERSION }}/QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
+        sudo tar xvf ./QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz -C /usr/local
+        rm QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
+
+    - name: Build dependency
+      run: |
+        brew install ninja
+
+    - name: Download source
+      run: |
+        wget https://download.qt.io/official_releases/qt/${{ env.QT_VERSION_MAJOR }}/${{ env.QT_VERSION }}/submodules/qtdeclarative-everywhere-src-${{ env.QT_VERSION }}.tar.xz
+        tar xvf qtdeclarative-everywhere-src-${{ env.QT_VERSION }}.tar.xz
+        rm qtdeclarative-everywhere-src-${{ env.QT_VERSION }}.tar.xz
+
+    - name: Build
+      run: |
+        cd qtdeclarative-everywhere-src-${{ env.QT_VERSION }}
+        echo "include(CPack)">>CMakeLists.txt
+        mkdir build
+        cd build
+        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja
+        cmake --build . --parallel
+        
+    - name: Package
+      id: package
+      run: |
+        cd qtdeclarative-everywhere-src-${{ env.QT_VERSION }}
+        cd build
+        cpack -G TXZ
+        mv  QtDeclarative-${{ env.QT_VERSION }}-Darwin.tar.xz  QtDeclarative-${{ env.QT_VERSION }}-Darwin-M1.tar.xz 
         cp *.xz ../..
         pwd
 
@@ -777,7 +838,7 @@ jobs:
     name: Mac OS X poppler (M1)
     needs: baseM1
     runs-on: macos-14
-    if: True
+    if: ${{ always() }}
 
     steps:
     - name: Checkout
