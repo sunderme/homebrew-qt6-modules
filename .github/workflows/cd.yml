@@ -64,7 +64,7 @@ jobs:
   baseM1:
     name: Mac OS X (M1)
     runs-on: macos-14
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -95,7 +95,8 @@ jobs:
       run: |
         cd qtbase-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        cpack -G TXZ -P QtBase-${{ env.QT_VERSION }}-Darwin-M1
+        cpack -G TXZ 
+        mv QtBase-${{ env.QT_VERSION }}-Darwin.tar.xz QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
         cp *.xz ../..
         pwd
 
@@ -215,7 +216,8 @@ jobs:
       run: |
         cd qtsvg-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        cpack -G TXZ -P QtSvg-${{ env.QT_VERSION }}-Darwin-M1
+        cpack -G TXZ 
+        mv QtSvg-${{ env.QT_VERSION }}-Darwin.tar.xz QtSvg-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
         cp *.xz ../..
         pwd
 
@@ -335,7 +337,8 @@ jobs:
       run: |
         cd qt5compat-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        cpack -G TXZ -P Qt5Compat-${{ env.QT_VERSION }}-Darwin-M1
+        cpack -G TXZ 
+        mv Qt5Compat-${{ env.QT_VERSION }}-Darwin.tar.xz Qt5Compat-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
         cp *.xz ../..
         pwd
 
@@ -396,6 +399,67 @@ jobs:
         cd qttools-everywhere-src-${{ env.QT_VERSION }}
         cd build
         cpack -G TXZ
+        cp *.xz ../..
+        pwd
+
+    - name: Archive bottle
+      uses: actions/upload-artifact@v3
+      with:
+        name: qt6-tools
+        path: Qt*.tar.xz 
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ env.QT_VERSION }}
+        files: Qt*.tar.xz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
+
+  toolsM1:
+    name: Mac OS X tools
+    needs: baseM1
+    runs-on: macos-14
+    if: False
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Install Dependencies
+      run: |
+        wget https://github.com/sunderme/homebrew-qt6-modules/releases/download/${{ env.QT_VERSION }}/QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
+        sudo tar xvf ./QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz -C /usr/local
+        rm QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
+
+    - name: Build dependency
+      run: |
+        brew install ninja
+
+    - name: Download source
+      run: |
+        wget https://download.qt.io/official_releases/qt/${{ env.QT_VERSION_MAJOR }}/${{ env.QT_VERSION }}/submodules/qttools-everywhere-src-${{ env.QT_VERSION }}.tar.xz
+        tar xvf qttools-everywhere-src-${{ env.QT_VERSION }}.tar.xz
+        rm qttools-everywhere-src-${{ env.QT_VERSION }}.tar.xz
+
+    - name: Build
+      run: |
+        cd qttools-everywhere-src-${{ env.QT_VERSION }}
+        echo "include(CPack)">>CMakeLists.txt
+        mkdir build
+        cd build
+        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja
+        cmake --build . --parallel
+        
+    - name: Package
+      id: package
+      run: |
+        cd qttools-everywhere-src-${{ env.QT_VERSION }}
+        cd build
+        cpack -G TXZ
+        mv QtTools-${{ env.QT_VERSION }}-Darwin.tar.xz QtTools-${{ env.QT_VERSION }}-Darwin-M1.tar.xz 
         cp *.xz ../..
         pwd
 
@@ -575,6 +639,66 @@ jobs:
         cd quazip-1.4
         cd build
         cpack -G TXZ
+        cp *.xz ../..
+        pwd
+
+    - name: Archive bottle
+      uses: actions/upload-artifact@v3
+      with:
+        name: quazip-qt6
+        path: QuaZip*.tar.xz 
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ env.QT_VERSION }}
+        files: QuaZip*.tar.xz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
+
+  quazipM1:
+    name: Mac OS X quazip (M1)
+    runs-on: macos-14
+    if: ${{ always() }}
+    needs: qt5compatM1
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Install Dependencies
+      run: |
+        wget https://github.com/sunderme/homebrew-qt6-modules/releases/download/${{ env.QT_VERSION }}/QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
+        sudo tar xvf ./QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz -C /usr/local
+        rm QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
+        wget https://github.com/sunderme/homebrew-qt6-modules/releases/download/${{ env.QT_VERSION }}/Qt5Compat-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
+        sudo tar xvf ./Qt5Compat-${{ env.QT_VERSION }}-Darwin-M1.tar.xz -C /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin --strip-components=1
+        rm Qt5Compat-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
+
+    - name: Download source
+      run: |
+        wget https://github.com/stachenov/quazip/archive/v1.4.tar.gz
+        tar xvf v1.4.tar.gz
+        rm v1.4.tar.gz
+
+    - name: Build
+      run: |
+        cd quazip-1.4
+        echo "include(CPack)">>CMakeLists.txt
+        mkdir build
+        cd build
+        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -DQUAZIP_BZIP2=off
+        cmake --build . --parallel
+        
+    - name: Package
+      id: package
+      run: |
+        cd quazip-1.4
+        cd build
+        cpack -G TXZ
+        mv QuaZip-1.4-Darwin.tar.xz QuaZip-1.4-Darwin-M1.tar.xz 
         cp *.xz ../..
         pwd
 
