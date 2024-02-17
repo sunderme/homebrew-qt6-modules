@@ -12,7 +12,7 @@ jobs:
   base:
     name: Mac OS X
     runs-on: macos-11
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -64,7 +64,7 @@ jobs:
   baseM1:
     name: Mac OS X (M1)
     runs-on: macos-14
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -118,7 +118,7 @@ jobs:
     name: Mac OS X qtsvg
     # needs: base
     runs-on: macos-11
-    if: False
+    if: True
 
     steps:
     - name: Checkout
@@ -239,7 +239,7 @@ jobs:
     name: Mac OS X qt5compat
     # needs: base
     runs-on: macos-11
-    if: False
+    if: True
 
     steps:
     - name: Checkout
@@ -360,7 +360,7 @@ jobs:
     name: Mac OS X tools
     # needs: base
     runs-on: macos-11
-    if: False
+    if: True
 
     steps:
     - name: Checkout
@@ -481,7 +481,7 @@ jobs:
     name: Mac OS X charts
     # needs: base
     runs-on: macos-11
-    if: False
+    if: True
 
     steps:
     - name: Checkout
@@ -541,7 +541,7 @@ jobs:
     name: Mac OS X declarative
     # needs: base
     runs-on: macos-11
-    if: False
+    if: True
 
     steps:
     - name: Checkout
