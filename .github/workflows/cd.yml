@@ -16,7 +16,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
@@ -48,7 +48,7 @@ jobs:
         pwd
 
     - name: Archive txz
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: qt6-base
         path: QtBase*.tar.xz 
@@ -68,7 +68,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
@@ -101,7 +101,7 @@ jobs:
         pwd
 
     - name: Archive txz
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: qt6-base
         path: QtBase*.tar.xz 
@@ -116,13 +116,13 @@ jobs:
       
   svg:
     name: Mac OS X qtsvg
-    # needs: base
+    needs: base
     runs-on: macos-11
-    if: True
+    # if: ${{ always() }}
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
@@ -161,7 +161,7 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: qt6-svg
         path: Qt*.tar.xz
@@ -182,7 +182,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
@@ -222,7 +222,7 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: qt6-svg
         path: Qt*.tar.xz
@@ -237,13 +237,13 @@ jobs:
       
   qt5compat:
     name: Mac OS X qt5compat
-    # needs: base
+    needs: base
     runs-on: macos-11
-    if: True
+    # if: ${{ always() }}
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
@@ -282,7 +282,7 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: qt6-qt5compat
         path: Qt*.tar.xz 
@@ -303,7 +303,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
@@ -343,7 +343,7 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: qt6-qt5compat
         path: Qt*.tar.xz 
@@ -358,13 +358,13 @@ jobs:
 
   tools:
     name: Mac OS X tools
-    # needs: base
+    needs: base
     runs-on: macos-11
-    if: True
+    # if: True
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
@@ -403,7 +403,7 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: qt6-tools
         path: Qt*.tar.xz 
@@ -424,7 +424,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
@@ -464,7 +464,7 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: qt6-tools
         path: Qt*.tar.xz 
@@ -479,13 +479,13 @@ jobs:
 
   charts:
     name: Mac OS X charts
-    # needs: base
+    needs: base
     runs-on: macos-11
-    if: True
+    # if: ${{ always() }}
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
@@ -524,7 +524,7 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: qt6-charts
         path: Qt*.tar.xz 
@@ -539,13 +539,13 @@ jobs:
 
   declarative:
     name: Mac OS X declarative
-    # needs: base
+    needs: base
     runs-on: macos-11
-    if: True
+    # if: ${{ always() }}
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
@@ -584,7 +584,7 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: qt6-declarative
         path: Qt*.tar.xz 
@@ -605,7 +605,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
@@ -645,7 +645,7 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: qt6-declarative
         path: Qt*.tar.xz 
@@ -666,7 +666,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
@@ -704,7 +704,7 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: quazip-qt6
         path: QuaZip*.tar.xz 
@@ -725,7 +725,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
@@ -764,7 +764,7 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: quazip-qt6
         path: QuaZip*.tar.xz 
@@ -779,13 +779,13 @@ jobs:
 
   poppler:
     name: Mac OS X poppler
-    # needs: base
+    needs: base
     runs-on: macos-11
-    if: True
+    # if: ${{ always() }}
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
@@ -821,7 +821,7 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: poppler-qt6
         path: poppler*.tar.xz 
@@ -842,7 +842,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
@@ -878,7 +878,7 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: poppler-qt6
         path: poppler*.tar.xz 
