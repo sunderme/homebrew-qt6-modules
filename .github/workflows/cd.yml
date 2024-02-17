@@ -838,7 +838,7 @@ jobs:
     name: Mac OS X poppler (M1)
     needs: baseM1
     runs-on: macos-14
-    if: ${{ always() }}
+    # if: ${{ always() }}
 
     steps:
     - name: Checkout
