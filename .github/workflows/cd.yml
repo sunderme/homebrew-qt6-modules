@@ -5,7 +5,7 @@ on:
 env:
   QT_VERSION: 6.6.2
   QT_VERSION_MAJOR: 6.6
-  POPPLER_VERSION: 24.02.0
+  POPPLER_VERSION: 24.03.0
 
 jobs:
   
@@ -781,7 +781,7 @@ jobs:
     name: Mac OS X poppler
     needs: base
     runs-on: macos-11
-    # if: ${{ always() }}
+    if: ${{ always() }}
 
     steps:
     - name: Checkout
@@ -838,7 +838,7 @@ jobs:
     name: Mac OS X poppler (M1)
     needs: baseM1
     runs-on: macos-14
-    # if: ${{ always() }}
+    if: ${{ always() }}
 
     steps:
     - name: Checkout
