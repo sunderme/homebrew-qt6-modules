@@ -64,7 +64,7 @@ jobs:
   baseM1:
     name: Mac OS X (M1)
     runs-on: macos-14
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -103,7 +103,7 @@ jobs:
     - name: Archive txz
       uses: actions/upload-artifact@v4
       with:
-        name: qt6-base
+        name: qt6-base-m1
         path: QtBase*.tar.xz 
 
     - name: Release
@@ -224,7 +224,7 @@ jobs:
     - name: Archive bottle
       uses: actions/upload-artifact@v4
       with:
-        name: qt6-svg
+        name: qt6-svg-m1
         path: Qt*.tar.xz
 
     - name: Release
@@ -345,7 +345,7 @@ jobs:
     - name: Archive bottle
       uses: actions/upload-artifact@v4
       with:
-        name: qt6-qt5compat
+        name: qt6-qt5compat-m1
         path: Qt*.tar.xz 
 
     - name: Release
@@ -466,7 +466,7 @@ jobs:
     - name: Archive bottle
       uses: actions/upload-artifact@v4
       with:
-        name: qt6-tools
+        name: qt6-tools-m1
         path: Qt*.tar.xz 
 
     - name: Release
@@ -647,7 +647,7 @@ jobs:
     - name: Archive bottle
       uses: actions/upload-artifact@v4
       with:
-        name: qt6-declarative
+        name: qt6-declarative-m1
         path: Qt*.tar.xz 
 
     - name: Release
@@ -766,7 +766,7 @@ jobs:
     - name: Archive bottle
       uses: actions/upload-artifact@v4
       with:
-        name: quazip-qt6
+        name: quazip-qt6-m1
         path: QuaZip*.tar.xz 
 
     - name: Release
