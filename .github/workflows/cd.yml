@@ -5,14 +5,14 @@ on:
 env:
   QT_VERSION: 6.6.3
   QT_VERSION_MAJOR: 6.6
-  POPPLER_VERSION: 24.03.0
+  POPPLER_VERSION: 24.04.0
 
 jobs:
   
   base:
     name: Mac OS X
     runs-on: macos-11
-    if: True
+    if: False
 
     steps:
     - name: Checkout
