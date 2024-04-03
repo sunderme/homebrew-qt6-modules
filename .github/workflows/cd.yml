@@ -54,7 +54,7 @@ jobs:
         path: QtBase*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: Qt*.tar.xz
@@ -107,7 +107,7 @@ jobs:
         path: QtBase*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: Qt*.tar.xz
@@ -167,7 +167,7 @@ jobs:
         path: Qt*.tar.xz
 
     - name: Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: Qt*.tar.xz
@@ -228,7 +228,7 @@ jobs:
         path: Qt*.tar.xz
 
     - name: Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: Qt*.tar.xz
@@ -288,7 +288,7 @@ jobs:
         path: Qt*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: Qt*.tar.xz
@@ -349,7 +349,7 @@ jobs:
         path: Qt*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: Qt*.tar.xz
@@ -409,7 +409,7 @@ jobs:
         path: Qt*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: Qt*.tar.xz
@@ -470,7 +470,7 @@ jobs:
         path: Qt*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: Qt*.tar.xz
@@ -530,7 +530,7 @@ jobs:
         path: Qt*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: Qt*.tar.xz
@@ -590,7 +590,7 @@ jobs:
         path: Qt*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: Qt*.tar.xz
@@ -651,7 +651,7 @@ jobs:
         path: Qt*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: Qt*.tar.xz
@@ -710,7 +710,7 @@ jobs:
         path: QuaZip*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: QuaZip*.tar.xz
@@ -770,7 +770,7 @@ jobs:
         path: QuaZip*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: QuaZip*.tar.xz
@@ -827,7 +827,7 @@ jobs:
         path: poppler*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: poppler*.tar.xz
@@ -884,7 +884,7 @@ jobs:
         path: poppler*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: poppler*.tar.xz
