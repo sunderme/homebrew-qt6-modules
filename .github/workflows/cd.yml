@@ -11,7 +11,7 @@ jobs:
   
   base:
     name: Mac OS X
-    runs-on: macos-11
+    runs-on: macos-12
     if: False
 
     steps:
