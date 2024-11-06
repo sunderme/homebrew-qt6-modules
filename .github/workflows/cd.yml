@@ -5,7 +5,7 @@ on:
 env:
   QT_VERSION: 6.8.0
   QT_VERSION_MAJOR: 6.8
-  POPPLER_VERSION: 24.10.0
+  POPPLER_VERSION: 24.11.0
 
 jobs:
   
@@ -541,7 +541,7 @@ jobs:
     name: Mac OS X charts (M1)
     needs: baseM1
     runs-on: macos-14
-    if: ${{ always() }}
+    # if: ${{ always() }}
 
     steps:
     - name: Checkout
