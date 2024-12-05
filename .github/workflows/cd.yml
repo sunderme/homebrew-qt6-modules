@@ -35,7 +35,7 @@ jobs:
         mkdir build
         cd build
         echo
-        cmake .. -G Ninja
+        cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
         
     - name: Package
@@ -43,8 +43,7 @@ jobs:
       run: |
         cd qtbase-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        sudo cmake --install .
-        sudo cpack -G TXZ
+        cpack -G TXZ
         cp *.xz ../..
         pwd
 
@@ -88,7 +87,7 @@ jobs:
         mkdir build
         cd build
         echo
-        cmake .. -G Ninja
+        cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
         
     - name: Package
@@ -96,8 +95,7 @@ jobs:
       run: |
         cd qtbase-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        sudo cmake --install .
-        sudo cpack -G TXZ 
+        cpack -G TXZ 
         mv QtBase-${{ env.QT_VERSION }}-Darwin.tar.xz QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
         cp *.xz ../..
         pwd
@@ -150,7 +148,7 @@ jobs:
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja
+        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
         
     - name: Package
@@ -158,8 +156,7 @@ jobs:
       run: |
         cd qtsvg-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        sudo cmake --install .
-        sudo cpack -G TXZ
+        cpack -G TXZ
         cp *.xz ../..
         pwd
 
@@ -211,7 +208,7 @@ jobs:
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja
+        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
         
     - name: Package
@@ -219,8 +216,7 @@ jobs:
       run: |
         cd qtsvg-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        sudo cmake --install .
-        sudo cpack -G TXZ
+        cpack -G TXZ
         mv QtSvg-${{ env.QT_VERSION }}-Darwin.tar.xz QtSvg-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
         cp *.xz ../..
         pwd
@@ -273,7 +269,7 @@ jobs:
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja
+        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
         
     - name: Package
@@ -281,8 +277,7 @@ jobs:
       run: |
         cd qt5compat-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        sudo cmake --install .
-        sudo cpack -G TXZ
+        cpack -G TXZ
         cp *.xz ../..
         pwd
 
@@ -334,7 +329,7 @@ jobs:
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja
+        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
         
     - name: Package
@@ -342,8 +337,7 @@ jobs:
       run: |
         cd qt5compat-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        sudo cmake --install .
-        sudo cpack -G TXZ
+        cpack -G TXZ
         mv Qt5Compat-${{ env.QT_VERSION }}-Darwin.tar.xz Qt5Compat-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
         cp *.xz ../..
         pwd
@@ -396,7 +390,7 @@ jobs:
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja
+        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
         
     - name: Package
@@ -404,8 +398,7 @@ jobs:
       run: |
         cd qttools-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        sudo cmake --install .
-        sudo cpack -G TXZ
+        cpack -G TXZ
         cp *.xz ../..
         pwd
 
@@ -457,7 +450,7 @@ jobs:
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja
+        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
         
     - name: Package
@@ -465,8 +458,7 @@ jobs:
       run: |
         cd qttools-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        sudo cmake --install .
-        sudo cpack -G TXZ
+        cpack -G TXZ
         mv QtTools-${{ env.QT_VERSION }}-Darwin.tar.xz QtTools-${{ env.QT_VERSION }}-Darwin-M1.tar.xz 
         cp *.xz ../..
         pwd
@@ -519,7 +511,7 @@ jobs:
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja
+        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
         
     - name: Package
@@ -527,8 +519,7 @@ jobs:
       run: |
         cd qtcharts-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        sudo cmake --install .
-        sudo cpack -G TXZ
+        cpack -G TXZ
         cp *.xz ../..
         pwd
 
@@ -580,7 +571,7 @@ jobs:
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja
+        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
         
     - name: Package
@@ -588,8 +579,7 @@ jobs:
       run: |
         cd qtcharts-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        sudo cmake --install .
-        sudo cpack -G TXZ
+        cpack -G TXZ
         mv  QtCharts-${{ env.QT_VERSION }}-Darwin.tar.xz  QtCharts-${{ env.QT_VERSION }}-Darwin-M1.tar.xz 
         cp *.xz ../..
         pwd
@@ -642,7 +632,7 @@ jobs:
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja
+        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
         
     - name: Package
@@ -650,8 +640,7 @@ jobs:
       run: |
         cd qtdeclarative-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        sudo cmake --install .
-        sudo cpack -G TXZ
+        cpack -G TXZ
         cp *.xz ../..
         pwd
 
@@ -703,7 +692,7 @@ jobs:
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
-        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja
+        /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
         
     - name: Package
@@ -711,8 +700,7 @@ jobs:
       run: |
         cd qtdeclarative-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        sudo cmake --install .
-        sudo cpack -G TXZ
+        cpack -G TXZ
         mv  QtDeclarative-${{ env.QT_VERSION }}-Darwin.tar.xz  QtDeclarative-${{ env.QT_VERSION }}-Darwin-M1.tar.xz 
         cp *.xz ../..
         pwd
@@ -772,8 +760,7 @@ jobs:
       run: |
         cd quazip-1.4
         cd build
-        sudo cmake --install .
-        sudo cpack -G TXZ
+        cpack -G TXZ
         cp *.xz ../..
         pwd
 
@@ -832,8 +819,7 @@ jobs:
       run: |
         cd quazip-1.4
         cd build
-        sudo cmake --install .
-        sudo cpack -G TXZ
+        cpack -G TXZ
         mv QuaZip-1.4-Darwin.tar.xz QuaZip-1.4-Darwin-M1.tar.xz 
         cp *.xz ../..
         pwd
@@ -891,8 +877,7 @@ jobs:
       run: |
         cd poppler-${{ env.POPPLER_VERSION }}
         cd build
-        sudo cmake --install .
-        sudo cpack -G TXZ
+        cpack -G TXZ
         cp *.xz ../../poppler-${{ env.POPPLER_VERSION }}-Darwin.tar.xz
         pwd
 
@@ -949,8 +934,7 @@ jobs:
       run: |
         cd poppler-${{ env.POPPLER_VERSION }}
         cd build
-        sudo cmake --install .
-        sudo cpack -G TXZ
+        cpack -G TXZ
         cp *.xz ../../poppler-${{ env.POPPLER_VERSION }}-Darwin-M1.tar.xz
         pwd
 
