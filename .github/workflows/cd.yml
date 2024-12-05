@@ -158,7 +158,8 @@ jobs:
       run: |
         cd qtsvg-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        cpack -G TXZ
+        sudo cmake --install .
+        sudo cpack -G TXZ
         cp *.xz ../..
         pwd
 
@@ -218,7 +219,8 @@ jobs:
       run: |
         cd qtsvg-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        cpack -G TXZ 
+        sudo cmake --install .
+        sudo cpack -G TXZ
         mv QtSvg-${{ env.QT_VERSION }}-Darwin.tar.xz QtSvg-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
         cp *.xz ../..
         pwd
@@ -279,7 +281,8 @@ jobs:
       run: |
         cd qt5compat-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        cpack -G TXZ
+        sudo cmake --install .
+        sudo cpack -G TXZ
         cp *.xz ../..
         pwd
 
@@ -339,7 +342,8 @@ jobs:
       run: |
         cd qt5compat-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        cpack -G TXZ 
+        sudo cmake --install .
+        sudo cpack -G TXZ
         mv Qt5Compat-${{ env.QT_VERSION }}-Darwin.tar.xz Qt5Compat-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
         cp *.xz ../..
         pwd
@@ -400,7 +404,8 @@ jobs:
       run: |
         cd qttools-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        cpack -G TXZ
+        sudo cmake --install .
+        sudo cpack -G TXZ
         cp *.xz ../..
         pwd
 
@@ -460,7 +465,8 @@ jobs:
       run: |
         cd qttools-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        cpack -G TXZ
+        sudo cmake --install .
+        sudo cpack -G TXZ
         mv QtTools-${{ env.QT_VERSION }}-Darwin.tar.xz QtTools-${{ env.QT_VERSION }}-Darwin-M1.tar.xz 
         cp *.xz ../..
         pwd
@@ -521,7 +527,8 @@ jobs:
       run: |
         cd qtcharts-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        cpack -G TXZ
+        sudo cmake --install .
+        sudo cpack -G TXZ
         cp *.xz ../..
         pwd
 
@@ -581,7 +588,8 @@ jobs:
       run: |
         cd qtcharts-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        cpack -G TXZ
+        sudo cmake --install .
+        sudo cpack -G TXZ
         mv  QtCharts-${{ env.QT_VERSION }}-Darwin.tar.xz  QtCharts-${{ env.QT_VERSION }}-Darwin-M1.tar.xz 
         cp *.xz ../..
         pwd
@@ -642,7 +650,8 @@ jobs:
       run: |
         cd qtdeclarative-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        cpack -G TXZ
+        sudo cmake --install .
+        sudo cpack -G TXZ
         cp *.xz ../..
         pwd
 
@@ -702,7 +711,8 @@ jobs:
       run: |
         cd qtdeclarative-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        cpack -G TXZ
+        sudo cmake --install .
+        sudo cpack -G TXZ
         mv  QtDeclarative-${{ env.QT_VERSION }}-Darwin.tar.xz  QtDeclarative-${{ env.QT_VERSION }}-Darwin-M1.tar.xz 
         cp *.xz ../..
         pwd
@@ -762,7 +772,8 @@ jobs:
       run: |
         cd quazip-1.4
         cd build
-        cpack -G TXZ
+        sudo cmake --install .
+        sudo cpack -G TXZ
         cp *.xz ../..
         pwd
 
@@ -821,7 +832,8 @@ jobs:
       run: |
         cd quazip-1.4
         cd build
-        cpack -G TXZ
+        sudo cmake --install .
+        sudo cpack -G TXZ
         mv QuaZip-1.4-Darwin.tar.xz QuaZip-1.4-Darwin-M1.tar.xz 
         cp *.xz ../..
         pwd
@@ -879,7 +891,8 @@ jobs:
       run: |
         cd poppler-${{ env.POPPLER_VERSION }}
         cd build
-        cpack -G TXZ
+        sudo cmake --install .
+        sudo cpack -G TXZ
         cp *.xz ../../poppler-${{ env.POPPLER_VERSION }}-Darwin.tar.xz
         pwd
 
@@ -936,7 +949,8 @@ jobs:
       run: |
         cd poppler-${{ env.POPPLER_VERSION }}
         cd build
-        cpack -G TXZ 
+        sudo cmake --install .
+        sudo cpack -G TXZ
         cp *.xz ../../poppler-${{ env.POPPLER_VERSION }}-Darwin-M1.tar.xz
         pwd
 
