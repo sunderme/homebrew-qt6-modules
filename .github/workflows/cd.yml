@@ -43,6 +43,7 @@ jobs:
       run: |
         cd qtbase-everywhere-src-${{ env.QT_VERSION }}
         cd build
+        cmake --install .
         cpack -G TXZ
         cp *.xz ../..
         pwd
@@ -95,6 +96,7 @@ jobs:
       run: |
         cd qtbase-everywhere-src-${{ env.QT_VERSION }}
         cd build
+        cmake --install .
         cpack -G TXZ 
         mv QtBase-${{ env.QT_VERSION }}-Darwin.tar.xz QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
         cp *.xz ../..
