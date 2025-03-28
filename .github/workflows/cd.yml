@@ -12,7 +12,7 @@ jobs:
   base:
     name: Mac OS X
     runs-on: macos-13
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -64,7 +64,7 @@ jobs:
   baseM1:
     name: Mac OS X (M1)
     runs-on: macos-14
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -742,13 +742,13 @@ jobs:
 
     - name: Download source
       run: |
-        wget https://github.com/stachenov/quazip/archive/v1.4.tar.gz
-        tar xvf v1.4.tar.gz
-        rm v1.4.tar.gz
+        wget https://github.com/stachenov/quazip/archive/v1.5.tar.gz
+        tar xvf v1.5.tar.gz
+        rm v1.5.tar.gz
 
     - name: Build
       run: |
-        cd quazip-1.4
+        cd quazip-1.5
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
@@ -758,7 +758,7 @@ jobs:
     - name: Package
       id: package
       run: |
-        cd quazip-1.4
+        cd quazip-1.5
         cd build
         cpack -G TXZ
         cp *.xz ../..
@@ -801,13 +801,13 @@ jobs:
 
     - name: Download source
       run: |
-        wget https://github.com/stachenov/quazip/archive/v1.4.tar.gz
-        tar xvf v1.4.tar.gz
-        rm v1.4.tar.gz
+        wget https://github.com/stachenov/quazip/archive/v1.5.tar.gz
+        tar xvf v1.5.tar.gz
+        rm v1.5.tar.gz
 
     - name: Build
       run: |
-        cd quazip-1.4
+        cd quazip-1.5
         echo "include(CPack)">>CMakeLists.txt
         mkdir build
         cd build
@@ -817,10 +817,10 @@ jobs:
     - name: Package
       id: package
       run: |
-        cd quazip-1.4
+        cd quazip-1.5
         cd build
         cpack -G TXZ
-        mv QuaZip-1.4-Darwin.tar.xz QuaZip-1.4-Darwin-M1.tar.xz 
+        mv QuaZip-1.5-Darwin.tar.xz QuaZip-1.5-Darwin-M1.tar.xz 
         cp *.xz ../..
         pwd
 
