@@ -722,7 +722,7 @@ jobs:
   quazip:
     name: Mac OS X quazip
     runs-on: macos-13
-    # if: ${{ always() }}
+    if: ${{ always() }}
     needs: qt5compat
 
     steps:
@@ -781,7 +781,7 @@ jobs:
   quazipM1:
     name: Mac OS X quazip (M1)
     runs-on: macos-14
-    # if: ${{ always() }}
+    if: ${{ always() }}
     needs: qt5compatM1
 
     steps:
