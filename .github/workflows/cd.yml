@@ -3,7 +3,7 @@ on:
   - push
 
 env:
-  QT_VERSION: 6.9.0
+  QT_VERSION: 6.9.1
   QT_VERSION_MAJOR: 6.9
   POPPLER_VERSION: 25.05.0
 
