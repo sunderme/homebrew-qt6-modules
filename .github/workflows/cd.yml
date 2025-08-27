@@ -3,9 +3,9 @@ on:
   - push
 
 env:
-  QT_VERSION: 6.9.1
+  QT_VERSION: 6.9.2
   QT_VERSION_MAJOR: 6.9
-  POPPLER_VERSION: 25.07.0
+  POPPLER_VERSION: 25.08.0
 
 jobs:
   
