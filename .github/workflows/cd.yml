@@ -12,7 +12,7 @@ jobs:
   base:
     name: Mac OS X
     runs-on: macos-13
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -64,7 +64,7 @@ jobs:
   baseM1:
     name: Mac OS X (M1)
     runs-on: macos-14
-    if: True
+    if: False
 
     steps:
     - name: Checkout
