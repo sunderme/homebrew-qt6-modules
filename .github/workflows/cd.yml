@@ -966,7 +966,11 @@ jobs:
         update: true
         install: | 
           git make mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-toolchain mingw-w64-ucrt-x86_64-ninja
-          mingw-w64-ucrt-x86_64-qt6-base
+          mingw-w64-ucrt-x86_64-qt6-base dos2unix
+    - name: fix CRLF
+      run: |
+        cd mingw-w64-poppler
+        dos2unix PKGBUILD
     - name: build poppler package
       run: |
         cd mingw-w64-poppler
@@ -995,7 +999,11 @@ jobs:
         update: true
         install: | 
           git make mingw-w64-clang-aarch64-cmake mingw-w64-clang-aarch64-toolchain mingw-w64-clang-aarch64-ninja
-          mingw-w64-clang-aarch64-qt6-base 
+          mingw-w64-clang-aarch64-qt6-base dos2unix
+    - name: fix CRLF
+      run: |
+        cd mingw-w64-poppler
+        dos2unix PKGBUILD
     - name: build poppler package
       run: |
         cd mingw-w64-poppler
