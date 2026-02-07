@@ -970,6 +970,7 @@ jobs:
     - name: fix CRLF
       run: |
         cd mingw-w64-poppler
+        0001-nopython-generate-enums.patch
         dos2unix PKGBUILD
     - name: build poppler package
       run: |
@@ -1003,6 +1004,7 @@ jobs:
     - name: fix CRLF
       run: |
         cd mingw-w64-poppler
+        dos2unix 0001-nopython-generate-enums.patch
         dos2unix PKGBUILD
     - name: build poppler package
       run: |
