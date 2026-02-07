@@ -12,7 +12,7 @@ jobs:
   base:
     name: Mac OS X
     runs-on: macos-15-intel
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -64,7 +64,7 @@ jobs:
   baseM1:
     name: Mac OS X (M1)
     runs-on: macos-14
-    if: True
+    if: False
 
     steps:
     - name: Checkout
@@ -952,3 +952,60 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
       
+  win_x86:
+    name: win build (msys2)
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+          install: | 
+            git make mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-toolchain mingw-w64-ucrt-x86_64-ninja
+            mingw-w64-ucrt-x86_64-qt6-base
+      - name: build poppler package
+        run: |
+          cd mingw-w64-poppler
+          makepkg-mingw --cleanbuild --syncdeps --force --noconfirm
+          mv *.pkg.tar.zst ..
+      
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.QT_VERSION }}
+          files: *.pkg.tar.zst
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}    
+
+  win10-arm:
+    name: win build (msys2,arm)
+    runs-on: windows-11-arm
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: CLANGARM64
+          update: true
+          install: | 
+            git make mingw-w64-clang-aarch64-cmake mingw-w64-clang-aarch64-toolchain mingw-w64-clang-aarch64-ninja
+            mingw-w64-clang-aarch64-qt6-base 
+      - name: build poppler package
+        run: |
+          cd mingw-w64-poppler
+          makepkg-mingw --cleanbuild --syncdeps --force --noconfirm
+          mv *.pkg.tar.zst ..
+      
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.QT_VERSION }}
+          files: *.pkg.tar.zst
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}    
