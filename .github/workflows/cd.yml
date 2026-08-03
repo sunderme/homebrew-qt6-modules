@@ -5,7 +5,7 @@ on:
 env:
   QT_VERSION: 6.11.1
   QT_VERSION_MAJOR: "6.11"
-  POPPLER_VERSION: 26.07.0
+  POPPLER_VERSION: 26.08.0
 
 jobs:
   
