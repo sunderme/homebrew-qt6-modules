@@ -16,7 +16,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
 
@@ -48,13 +48,13 @@ jobs:
         pwd
 
     - name: Archive txz
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: qt6-base
         path: QtBase*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: Qt*.tar.xz
@@ -68,7 +68,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
 
@@ -101,13 +101,13 @@ jobs:
         pwd
 
     - name: Archive txz
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: qt6-base-m1
         path: QtBase*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: Qt*.tar.xz
@@ -122,7 +122,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
 
@@ -161,13 +161,13 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: qt6-svg
         path: Qt*.tar.xz
 
     - name: Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: Qt*.tar.xz
@@ -182,7 +182,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
 
@@ -222,13 +222,13 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: qt6-svg-m1
         path: Qt*.tar.xz
 
     - name: Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: Qt*.tar.xz
@@ -243,7 +243,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
 
@@ -282,13 +282,13 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: qt6-qt5compat
         path: Qt*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: Qt*.tar.xz
@@ -303,7 +303,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
 
@@ -343,13 +343,13 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: qt6-qt5compat-m1
         path: Qt*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: Qt*.tar.xz
@@ -364,7 +364,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
 
@@ -403,13 +403,13 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: qt6-tools
         path: Qt*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: Qt*.tar.xz
@@ -424,7 +424,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
 
@@ -464,13 +464,13 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: qt6-tools-m1
         path: Qt*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: Qt*.tar.xz
@@ -485,7 +485,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
 
@@ -524,13 +524,13 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: qt6-charts
         path: Qt*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: Qt*.tar.xz
@@ -545,7 +545,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
 
@@ -585,13 +585,13 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: qt6-charts-m1
         path: Qt*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: Qt*.tar.xz
@@ -606,7 +606,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
 
@@ -645,13 +645,13 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: qt6-declarative
         path: Qt*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: Qt*.tar.xz
@@ -666,7 +666,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
 
@@ -706,13 +706,13 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: qt6-declarative-m1
         path: Qt*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: Qt*.tar.xz
@@ -727,7 +727,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
 
@@ -765,13 +765,13 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: quazip-qt6
         path: QuaZip*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: QuaZip*.tar.xz
@@ -786,7 +786,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
 
@@ -825,13 +825,13 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: quazip-qt6-m1
         path: QuaZip*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: QuaZip*.tar.xz
@@ -846,7 +846,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
 
@@ -882,13 +882,13 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: poppler-qt6
         path: poppler*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: poppler*.tar.xz
@@ -903,7 +903,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
 
@@ -939,13 +939,13 @@ jobs:
         pwd
 
     - name: Archive bottle
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: poppler-qt6-m1
         path: poppler*.tar.xz 
 
     - name: Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: poppler*.tar.xz
@@ -979,7 +979,7 @@ jobs:
         mv *.pkg.tar.zst ..
     
     - name: Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: ming*.pkg.tar.zst
@@ -1013,7 +1013,7 @@ jobs:
         mv *.pkg.tar.zst ..
     
     - name: Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: mingw*.pkg.tar.zst
