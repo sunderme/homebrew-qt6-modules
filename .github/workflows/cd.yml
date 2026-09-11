@@ -3,16 +3,16 @@ on:
   - push
 
 env:
-  QT_VERSION: 6.11.1
+  QT_VERSION: 6.11.2
   QT_VERSION_MAJOR: "6.11"
-  POPPLER_VERSION: 26.08.0
+  POPPLER_VERSION: 26.09.0
 
 jobs:
-  
+
   base:
     name: Mac OS X
     runs-on: macos-15-intel
-    if: False
+    if: True
 
     steps:
     - name: Checkout
@@ -37,7 +37,7 @@ jobs:
         echo
         cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
-        
+
     - name: Package
       id: package
       run: |
@@ -51,7 +51,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         name: qt6-base
-        path: QtBase*.tar.xz 
+        path: QtBase*.tar.xz
 
     - name: Release
       uses: softprops/action-gh-release@v3
@@ -64,7 +64,7 @@ jobs:
   baseM1:
     name: Mac OS X (M1)
     runs-on: macos-14
-    if: False
+    if: True
 
     steps:
     - name: Checkout
@@ -89,13 +89,13 @@ jobs:
         echo
         cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
-        
+
     - name: Package
       id: package
       run: |
         cd qtbase-everywhere-src-${{ env.QT_VERSION }}
         cd build
-        cpack -G TXZ 
+        cpack -G TXZ
         mv QtBase-${{ env.QT_VERSION }}-Darwin.tar.xz QtBase-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
         cp *.xz ../..
         pwd
@@ -104,7 +104,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         name: qt6-base-m1
-        path: QtBase*.tar.xz 
+        path: QtBase*.tar.xz
 
     - name: Release
       uses: softprops/action-gh-release@v3
@@ -113,7 +113,7 @@ jobs:
         files: Qt*.tar.xz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
-      
+
   svg:
     name: Mac OS X qtsvg
     needs: base
@@ -150,7 +150,7 @@ jobs:
         cd build
         /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
-        
+
     - name: Package
       id: package
       run: |
@@ -210,7 +210,7 @@ jobs:
         cd build
         /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
-        
+
     - name: Package
       id: package
       run: |
@@ -234,7 +234,7 @@ jobs:
         files: Qt*.tar.xz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
-      
+
   qt5compat:
     name: Mac OS X qt5compat
     needs: base
@@ -271,7 +271,7 @@ jobs:
         cd build
         /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
-        
+
     - name: Package
       id: package
       run: |
@@ -285,7 +285,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         name: qt6-qt5compat
-        path: Qt*.tar.xz 
+        path: Qt*.tar.xz
 
     - name: Release
       uses: softprops/action-gh-release@v3
@@ -294,7 +294,7 @@ jobs:
         files: Qt*.tar.xz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
-    
+
   qt5compatM1:
     name: Mac OS X qt5compat (M1)
     needs: baseM1
@@ -331,7 +331,7 @@ jobs:
         cd build
         /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
-        
+
     - name: Package
       id: package
       run: |
@@ -346,7 +346,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         name: qt6-qt5compat-m1
-        path: Qt*.tar.xz 
+        path: Qt*.tar.xz
 
     - name: Release
       uses: softprops/action-gh-release@v3
@@ -392,7 +392,7 @@ jobs:
         cd build
         /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
-        
+
     - name: Package
       id: package
       run: |
@@ -406,7 +406,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         name: qt6-tools
-        path: Qt*.tar.xz 
+        path: Qt*.tar.xz
 
     - name: Release
       uses: softprops/action-gh-release@v3
@@ -452,14 +452,14 @@ jobs:
         cd build
         /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
-        
+
     - name: Package
       id: package
       run: |
         cd qttools-everywhere-src-${{ env.QT_VERSION }}
         cd build
         cpack -G TXZ
-        mv QtTools-${{ env.QT_VERSION }}-Darwin.tar.xz QtTools-${{ env.QT_VERSION }}-Darwin-M1.tar.xz 
+        mv QtTools-${{ env.QT_VERSION }}-Darwin.tar.xz QtTools-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
         cp *.xz ../..
         pwd
 
@@ -467,7 +467,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         name: qt6-tools-m1
-        path: Qt*.tar.xz 
+        path: Qt*.tar.xz
 
     - name: Release
       uses: softprops/action-gh-release@v3
@@ -513,7 +513,7 @@ jobs:
         cd build
         /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
-        
+
     - name: Package
       id: package
       run: |
@@ -527,7 +527,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         name: qt6-charts
-        path: Qt*.tar.xz 
+        path: Qt*.tar.xz
 
     - name: Release
       uses: softprops/action-gh-release@v3
@@ -573,14 +573,14 @@ jobs:
         cd build
         /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
-        
+
     - name: Package
       id: package
       run: |
         cd qtcharts-everywhere-src-${{ env.QT_VERSION }}
         cd build
         cpack -G TXZ
-        mv  QtCharts-${{ env.QT_VERSION }}-Darwin.tar.xz  QtCharts-${{ env.QT_VERSION }}-Darwin-M1.tar.xz 
+        mv  QtCharts-${{ env.QT_VERSION }}-Darwin.tar.xz  QtCharts-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
         cp *.xz ../..
         pwd
 
@@ -588,7 +588,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         name: qt6-charts-m1
-        path: Qt*.tar.xz 
+        path: Qt*.tar.xz
 
     - name: Release
       uses: softprops/action-gh-release@v3
@@ -634,7 +634,7 @@ jobs:
         cd build
         /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
-        
+
     - name: Package
       id: package
       run: |
@@ -648,7 +648,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         name: qt6-declarative
-        path: Qt*.tar.xz 
+        path: Qt*.tar.xz
 
     - name: Release
       uses: softprops/action-gh-release@v3
@@ -694,14 +694,14 @@ jobs:
         cd build
         /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -G Ninja -DQT_GENERATE_SBOM=OFF
         cmake --build . --parallel
-        
+
     - name: Package
       id: package
       run: |
         cd qtdeclarative-everywhere-src-${{ env.QT_VERSION }}
         cd build
         cpack -G TXZ
-        mv  QtDeclarative-${{ env.QT_VERSION }}-Darwin.tar.xz  QtDeclarative-${{ env.QT_VERSION }}-Darwin-M1.tar.xz 
+        mv  QtDeclarative-${{ env.QT_VERSION }}-Darwin.tar.xz  QtDeclarative-${{ env.QT_VERSION }}-Darwin-M1.tar.xz
         cp *.xz ../..
         pwd
 
@@ -709,7 +709,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         name: qt6-declarative-m1
-        path: Qt*.tar.xz 
+        path: Qt*.tar.xz
 
     - name: Release
       uses: softprops/action-gh-release@v3
@@ -718,7 +718,7 @@ jobs:
         files: Qt*.tar.xz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
-  
+
   quazip:
     name: Mac OS X quazip
     runs-on: macos-15-intel
@@ -754,7 +754,7 @@ jobs:
         cd build
         /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -DQUAZIP_BZIP2=off
         cmake --build . --parallel
-        
+
     - name: Package
       id: package
       run: |
@@ -768,7 +768,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         name: quazip-qt6
-        path: QuaZip*.tar.xz 
+        path: QuaZip*.tar.xz
 
     - name: Release
       uses: softprops/action-gh-release@v3
@@ -813,14 +813,14 @@ jobs:
         cd build
         /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -DQUAZIP_BZIP2=off
         cmake --build . --parallel
-        
+
     - name: Package
       id: package
       run: |
         cd quazip-1.5
         cd build
         cpack -G TXZ
-        mv QuaZip-1.5-Darwin.tar.xz QuaZip-1.5-Darwin-M1.tar.xz 
+        mv QuaZip-1.5-Darwin.tar.xz QuaZip-1.5-Darwin-M1.tar.xz
         cp *.xz ../..
         pwd
 
@@ -828,7 +828,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         name: quazip-qt6-m1
-        path: QuaZip*.tar.xz 
+        path: QuaZip*.tar.xz
 
     - name: Release
       uses: softprops/action-gh-release@v3
@@ -871,7 +871,7 @@ jobs:
         cd build
         /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -DBUILD_GTK_TESTS=OFF -DENABLE_BOOST=OFF -DENABLE_CMS=lcms2 -DENABLE_GLIB=OFF -DENABLE_QT5=OFF -DENABLE_QT6=ON -DENABLE_UNSTABLE_API_ABI_HEADERS=ON -DWITH_GObjectIntrospection=OFF -DENABLE_NSS3=OFF -DENABLE_GPGME=OFF -DENABLE_LIBTIFF=OFF
         cmake --build . --parallel
-        
+
     - name: Package
       id: package
       run: |
@@ -885,7 +885,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         name: poppler-qt6
-        path: poppler*.tar.xz 
+        path: poppler*.tar.xz
 
     - name: Release
       uses: softprops/action-gh-release@v3
@@ -928,7 +928,7 @@ jobs:
         cd build
         /usr/local/QtBase-${{ env.QT_VERSION }}-Darwin/bin/qt-cmake .. -DBUILD_GTK_TESTS=OFF -DENABLE_BOOST=OFF -DENABLE_CMS=lcms2 -DENABLE_GLIB=OFF -DENABLE_QT5=OFF -DENABLE_QT6=ON -DENABLE_UNSTABLE_API_ABI_HEADERS=ON -DWITH_GObjectIntrospection=OFF -DENABLE_NSS3=OFF -DENABLE_GPGME=OFF -DENABLE_LIBTIFF=OFF
         cmake --build . --parallel
-        
+
     - name: Package
       id: package
       run: |
@@ -942,7 +942,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         name: poppler-qt6-m1
-        path: poppler*.tar.xz 
+        path: poppler*.tar.xz
 
     - name: Release
       uses: softprops/action-gh-release@v3
@@ -951,7 +951,7 @@ jobs:
         files: poppler*.tar.xz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
-      
+
   win_x86:
     name: win build (msys2)
     runs-on: windows-latest
@@ -964,7 +964,7 @@ jobs:
       with:
         msystem: UCRT64
         update: true
-        install: | 
+        install: |
           git make mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-toolchain mingw-w64-ucrt-x86_64-ninja
           mingw-w64-ucrt-x86_64-qt6-base dos2unix base-devel
     - name: fix CRLF
@@ -977,14 +977,14 @@ jobs:
         cd mingw-w64-poppler
         makepkg-mingw --cleanbuild --syncdeps --force --noconfirm
         mv *.pkg.tar.zst ..
-    
+
     - name: Release
       uses: softprops/action-gh-release@v3
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: ming*.pkg.tar.zst
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}    
+        GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
 
   win10-arm:
     name: win build (msys2,arm)
@@ -998,7 +998,7 @@ jobs:
       with:
         msystem: CLANGARM64
         update: true
-        install: | 
+        install: |
           git make mingw-w64-clang-aarch64-cmake mingw-w64-clang-aarch64-toolchain mingw-w64-clang-aarch64-ninja
           mingw-w64-clang-aarch64-qt6-base dos2unix base-devel
     - name: fix CRLF
@@ -1011,11 +1011,11 @@ jobs:
         cd mingw-w64-poppler
         makepkg-mingw --cleanbuild --syncdeps --force --noconfirm
         mv *.pkg.tar.zst ..
-    
+
     - name: Release
       uses: softprops/action-gh-release@v3
       with:
         tag_name: ${{ env.QT_VERSION }}
         files: mingw*.pkg.tar.zst
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}    
+        GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
