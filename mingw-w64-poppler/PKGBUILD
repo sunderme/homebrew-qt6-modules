@@ -6,7 +6,7 @@ pkgname=("${MINGW_PACKAGE_PREFIX}-${_realname}"
          $([[ ${CARCH} == i686 ]] || echo \
            "${MINGW_PACKAGE_PREFIX}-${_realname}-qt5" \
            "${MINGW_PACKAGE_PREFIX}-${_realname}-qt6"))
-pkgver=26.09.0
+pkgver=26.10.0
 pkgrel=1
 arch=('any')
 mingw_arch=('mingw32' 'mingw64' 'ucrt64' 'clang64' 'clangarm64')
@@ -43,7 +43,7 @@ depends=("${MINGW_PACKAGE_PREFIX}-cairo"
 source=(https://poppler.freedesktop.org/${_realname}-${pkgver}.tar.xz
         test::git+https://gitlab.freedesktop.org/poppler/test.git#commit=ff3133cdb6cb496ee1d2c3231bfa35006a5e8410
         '0001-nopython-generate-enums.patch')
-sha256sums=('8059eadb6805340768f138c465b57f8164c92b4a0773c37ef031ea6c0d987b2e'
+sha256sums=('6792cb7c69205007ad87d2e936cecc5b3a31fac29ab54ffc3175fdb6b2a6ce35'
             '0efc9bd1797f0f0dfa514d4109e82c99d7e98c3e95587c70945508493074fcdf'
             '315356263b5ebee5431a2e079ac76492a8919a04a798f6c6d53c64f44b433db6')
 
