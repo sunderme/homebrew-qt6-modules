@@ -63,7 +63,7 @@ jobs:
 
   baseM1:
     name: Mac OS X (M1)
-    runs-on: macos-14
+    runs-on: macos-15
     if: True
 
     steps:
@@ -177,7 +177,7 @@ jobs:
   svgM1:
     name: Mac OS X qtsvg (M1)
     needs: baseM1
-    runs-on: macos-14
+    runs-on: macos-15
     # if: ${{ always() }}
 
     steps:
@@ -298,7 +298,7 @@ jobs:
   qt5compatM1:
     name: Mac OS X qt5compat (M1)
     needs: baseM1
-    runs-on: macos-14
+    runs-on: macos-15
     # if: ${{ always() }}
 
     steps:
@@ -419,7 +419,7 @@ jobs:
   toolsM1:
     name: Mac OS X tools (M1)
     needs: baseM1
-    runs-on: macos-14
+    runs-on: macos-15
     # if: ${{ always() }}
 
     steps:
@@ -540,7 +540,7 @@ jobs:
   chartsM1:
     name: Mac OS X charts (M1)
     needs: baseM1
-    runs-on: macos-14
+    runs-on: macos-15
     # if: ${{ always() }}
 
     steps:
@@ -661,7 +661,7 @@ jobs:
   declarativeM1:
     name: Mac OS X declarative (M1)
     needs: baseM1
-    runs-on: macos-14
+    runs-on: macos-15
     # if: ${{ always() }}
 
     steps:
@@ -780,7 +780,7 @@ jobs:
 
   quazipM1:
     name: Mac OS X quazip (M1)
-    runs-on: macos-14
+    runs-on: macos-15
     # if: ${{ always() }}
     needs: qt5compatM1
 
@@ -898,7 +898,7 @@ jobs:
   popplerM1:
     name: Mac OS X poppler (M1)
     needs: baseM1
-    runs-on: macos-14
+    runs-on: macos-15
     if: ${{ always() }}
 
     steps:
